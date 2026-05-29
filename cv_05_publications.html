@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Francis Nyonzo – Publications</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1a2e; --gold: #c9a84c; --gold-light: #e8d08a;
+    --cream: #faf8f3; --muted: #6b6b7b; --border: #e8e2d6;
+    --peer: #1a6e4a; --oped: #2c5282;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); }
+  .section { padding: 52px 40px; max-width: 860px; margin: 0 auto; }
+  .section-label { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+  .section-label span { font-size: 10.5px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, var(--gold), transparent); opacity: 0.4; }
+  h2 { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; margin-bottom: 10px; }
+  .sub-intro { font-size: 14px; color: var(--muted); margin-bottom: 36px; font-weight: 300; }
+
+  .pub-group-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700;
+    margin-bottom: 18px; margin-top: 40px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .pub-group-title:first-of-type { margin-top: 0; }
+  .pub-group-title .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+  .dot-peer { background: var(--peer); }
+  .dot-oped { background: var(--oped); }
+
+  .pub-list { display: flex; flex-direction: column; gap: 12px; }
+  .pub-card {
+    background: white; border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+    border-left: 4px solid transparent;
+    transition: transform 0.18s, box-shadow 0.18s;
+  }
+  .pub-card:hover { transform: translateX(4px); box-shadow: 0 5px 18px rgba(0,0,0,0.07); }
+  .pub-card.peer { border-left-color: var(--peer); }
+  .pub-card.oped { border-left-color: var(--oped); }
+  .pub-year {
+    font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    padding: 2px 8px; border-radius: 3px; display: inline-block; margin-bottom: 7px;
+  }
+  .pub-card.peer .pub-year { background: rgba(26,110,74,0.1); color: var(--peer); }
+  .pub-card.oped .pub-year { background: rgba(44,82,130,0.1); color: var(--oped); }
+  .pub-title {
+    font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 5px; line-height: 1.4;
+  }
+  .pub-title a {
+    color: inherit; text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .pub-title a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+  .pub-meta { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  .pub-citation { font-size: 11.5px; color: #888; margin-top: 5px; font-style: italic; }
+  .pub-link {
+    display: inline-flex; align-items: center; gap: 5px;
+    margin-top: 8px; font-size: 11.5px; font-weight: 600;
+    color: var(--gold); text-decoration: none;
+    border: 1px solid rgba(201,168,76,0.3); border-radius: 4px;
+    padding: 3px 10px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .pub-link:hover { background: var(--gold); color: white; }
+  @media (max-width: 600px) { .section { padding: 36px 20px; } }
+</style>
+</head>
+<body>
+<div class="section">
+  <div class="section-label"><span>Research &amp; Writing</span></div>
+  <h2>Publications</h2>
+  <p class="sub-intro">A selection of peer-reviewed academic articles and public commentary across economics, media, governance and development.</p>
+
+  <!-- PEER-REVIEWED -->
+  <div class="pub-group-title"><span class="dot dot-peer"></span> Peer-Reviewed &amp; Academic Publications</div>
+  <div class="pub-list">
+
+    <div class="pub-card peer">
+      <span class="pub-year">2025</span>
+      <div class="pub-title">Denominational Inflation: Limited Currency Divisibility in Cash Payment Systems – Tanzania as a Case Study</div>
+      <div class="pub-meta">Francis Stephen Nyonzo</div>
+      <div class="pub-citation"><em>Advanced Research in Economics and Business Strategy Journal</em>, 6(1), 200–214. University of Oran 2.</div>
+    </div>
+
+    <div class="pub-card peer">
+      <span class="pub-year">2024</span>
+      <div class="pub-title">Assessing Tanzanians' Response to the Implementation of a Mobile Money Transaction Levy</div>
+      <div class="pub-meta">Francis Nyonzo</div>
+      <div class="pub-citation"><em>African Multidisciplinary Tax Journal</em>, 4(1), 167–186.</div>
+    </div>
+
+    <div class="pub-card peer">
+      <span class="pub-year">2022</span>
+      <div class="pub-title">Tanzania's Solidarity Tax</div>
+      <div class="pub-meta">Francis Nyonzo</div>
+      <div class="pub-citation"><em>Review of African Political Economy</em>, 49(174), 643–651.</div>
+      <a class="pub-link" href="https://scholar.google.com/citations?user=H3h_rfkAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">↗ View on Google Scholar</a>
+    </div>
+
+  </div>
+
+  <!-- OP-EDS & COMMENTARIES -->
+  <div class="pub-group-title"><span class="dot dot-oped"></span> Op-Eds, Commentaries &amp; Policy Articles</div>
+  <div class="pub-list">
+
+    <div class="pub-card oped">
+      <span class="pub-year">2026</span>
+      <div class="pub-title">Preserving Democracy in Africa: Dispelling the Myth of 'Localising'</div>
+      <div class="pub-meta">The Chanzo</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2026</span>
+      <div class="pub-title">When Desperation Turns Deadly: Could Tanzania's Magical Violence Really Be About Economic Pain?</div>
+      <div class="pub-meta">The Chanzo</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2026</span>
+      <div class="pub-title">Beyond Tax Enforcement: A Mobile Money Strategy for Formalising Tanzania's Informal Economy</div>
+      <div class="pub-meta">Liberty Sparks</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2026</span>
+      <div class="pub-title">Mobile Money Could Be Africa's Most Powerful Tax Collector — If Governments Let It</div>
+      <div class="pub-meta">The Chanzo</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2026</span>
+      <div class="pub-title">A Youth Bank in Name Only Won't Empower Tanzania's Young</div>
+      <div class="pub-meta">The Chanzo</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2026</span>
+      <div class="pub-title">1.6GB a Month: The Barrier to Tanzania's Digital Transformation</div>
+      <div class="pub-meta">The Chanzo</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2024</span>
+      <div class="pub-title">Kenya, Tanzania Cat and Mouse Games Hurting Cross-Border Trade and Prosperity</div>
+      <div class="pub-meta">Liberty Sparks</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2024</span>
+      <div class="pub-title">Workers' Welfare: Failure of Courts of Trade Unions</div>
+      <div class="pub-meta">Op-Ed</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2024</span>
+      <div class="pub-title">No Tanzanian Child Should Be Dismissed From School for Indiscipline</div>
+      <div class="pub-meta">Op-Ed</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2024</span>
+      <div class="pub-title">Uchawa Vs. Professional Networking: Understanding Key Differences</div>
+      <div class="pub-meta">The Chanzo Initiative</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2024</span>
+      <div class="pub-title">Tanzania's Foreign Media Ownership Restrictions Impact Citizens' Freedom of Speech</div>
+      <div class="pub-meta">The Chanzo Initiative</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2023</span>
+      <div class="pub-title">The Challenges of Free Education in Tanzania</div>
+      <div class="pub-meta">Office of the United Nations High Commissioner for Human Rights (OHCHR)</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2023</span>
+      <div class="pub-title">Tanzania's Media Services Act: A Manifestation of the Man With the Hammer Syndrome?</div>
+      <div class="pub-meta">The Chanzo Initiative</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2023</span>
+      <div class="pub-title">Tanzania's "Vagrancy Law" Crusade on Poor Citizens is Wrong</div>
+      <div class="pub-meta">The Chanzo Initiative</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2023</span>
+      <div class="pub-title">Data Bundle Price Hikes Limit Access to Information in Tanzania</div>
+      <div class="pub-meta">Fesmedia Africa</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2023</span>
+      <div class="pub-title">Will the East African Community Competition Authority Enhance Competition and Protect Consumers?</div>
+      <div class="pub-meta">Liberty Sparks</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2023</span>
+      <div class="pub-title">Towards a Seamless Payment System: Paving the Way for East African Integration</div>
+      <div class="pub-meta">Liberty Sparks</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2023</span>
+      <div class="pub-title">Enforcing Regional Judiciary Decisions: The Case of Tanzania's Media Services Act</div>
+      <div class="pub-meta">African Centre for Media Excellence (ACME)</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2022</span>
+      <div class="pub-title">Legal and Financial Environment for Micro-Entrepreneurs in Tanzania</div>
+      <div class="pub-meta">African Association of Entrepreneurs</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2022</span>
+      <div class="pub-title">Limitations of Online Survey Tools for Developing Countries</div>
+      <div class="pub-meta">AuthorAid</div>
+    </div>
+
+    <div class="pub-card oped">
+      <span class="pub-year">2022</span>
+      <div class="pub-title">Since 'Data is the New Oil', Researchers Must Become Skilled in Cyber Security</div>
+      <div class="pub-meta">AuthorAid</div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:28px; text-align:center;">
+    <a class="pub-link" href="https://scholar.google.com/citations?user=H3h_rfkAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener" style="display:inline-flex; font-size:13px; padding:10px 22px;">
+      ↗ Full Publication List on Google Scholar
+    </a>
+  </div>
+</div>
+</body>
+</html>

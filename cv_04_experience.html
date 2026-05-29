@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Francis Nyonzo – Experience</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1a2e; --gold: #c9a84c; --gold-light: #e8d08a;
+    --cream: #faf8f3; --muted: #6b6b7b; --border: #e8e2d6;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); }
+  .section { padding: 52px 40px; max-width: 860px; margin: 0 auto; }
+  .section-label { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+  .section-label span { font-size: 10.5px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, var(--gold), transparent); opacity: 0.4; }
+  h2 { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; margin-bottom: 32px; }
+
+  .exp-list { display: flex; flex-direction: column; gap: 20px; }
+  .exp-card {
+    background: white; border: 1px solid var(--border); border-radius: 14px;
+    overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .exp-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.09); transform: translateY(-2px); }
+  .exp-header {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start;
+    padding: 20px 24px 16px;
+    border-left: 4px solid var(--gold);
+    gap: 10px;
+  }
+  .exp-header-left {}
+  .exp-org {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 4px;
+  }
+  .exp-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px; font-weight: 700; color: var(--ink);
+    line-height: 1.2;
+  }
+  .exp-meta {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0;
+  }
+  .exp-date {
+    font-size: 12px; font-weight: 600; color: var(--gold);
+    background: rgba(201,168,76,0.1); padding: 3px 10px; border-radius: 4px;
+  }
+  .exp-loc {
+    font-size: 11.5px; color: var(--muted);
+  }
+  .exp-body { padding: 4px 24px 20px; }
+  .exp-body ul { list-style: none; margin: 0; padding: 0; }
+  .exp-body ul li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 13.5px; color: #3a3a50; line-height: 1.7;
+    margin-bottom: 6px;
+    font-weight: 300;
+  }
+  .exp-body ul li::before {
+    content: '→';
+    position: absolute; left: 0; top: 0;
+    color: var(--gold); font-size: 12px; line-height: 1.7;
+  }
+  .current-badge {
+    display: inline-block; padding: 2px 8px; border-radius: 20px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: white; margin-left: 8px; vertical-align: middle;
+  }
+  @media (max-width: 600px) {
+    .section { padding: 36px 20px; }
+    .exp-header { flex-direction: column; }
+    .exp-meta { align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="section">
+  <div class="section-label"><span>Career</span></div>
+  <h2>Work Experience</h2>
+
+  <div class="exp-list">
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-header-left">
+          <div class="exp-org">JamiiAfrica</div>
+          <div class="exp-role">Programme Officer – Digital Democracy <span class="current-badge">Current</span></div>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-date">Jan 2025 – Feb 2026</span>
+          <span class="exp-loc">Dar es Salaam, Tanzania</span>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>Promoted digital democracy by conducting training sessions for diverse groups and preparing comprehensive reports.</li>
+          <li>Analysed and assessed programme performance data and implemented corrective measures to improve outcomes.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-header-left">
+          <div class="exp-org">Spartan Innovations / Michigan State University</div>
+          <div class="exp-role">Programme Coordination Intern</div>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-date">Jan – May 2025</span>
+          <span class="exp-loc">East Lansing, United States</span>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>Directed daily operations of the Accelerator programme, ensuring efficient execution and logistical excellence.</li>
+          <li>Drove continuous programme enhancement by supporting strategic initiatives and optimising processes.</li>
+          <li>Monitored and analysed key programme metrics and participant progress to inform evidence-based decisions.</li>
+          <li>Managed logistical and operational requirements ensuring a seamless environment for all participants.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-header-left">
+          <div class="exp-org">Liberty Sparks</div>
+          <div class="exp-role">Research Associate <span class="current-badge">Current</span></div>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-date">Jan 2023 – Present</span>
+          <span class="exp-loc">Dar es Salaam, Tanzania</span>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>Conducted in-depth research and analysis specialising in the African Continental Free Trade Area (AfCFTA) and the East African Community.</li>
+          <li>Authored and published articles translating complex research findings into clear communications for diverse audiences.</li>
+          <li>Collaborated with the Marketing and Communications team to review, edit and amend content for editorial accuracy.</li>
+          <li>Identified and secured international platforms for publishing content, maximising media coverage and global outreach.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-header-left">
+          <div class="exp-org">JamiiAfrica</div>
+          <div class="exp-role">Head of Content Management Department</div>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-date">Mar 2022 – Jul 2024</span>
+          <span class="exp-loc">Dar es Salaam, Tanzania</span>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>Developed and executed comprehensive strategic plans ensuring alignment with organisational goals.</li>
+          <li>Established and managed performance tracking frameworks, conducting detailed analyses of departmental activities.</li>
+          <li>Prepared and presented concise progress reports and performance metrics to key stakeholders.</li>
+          <li>Mentored and coached interns and trainees, contributing significantly to team capacity and professional growth.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-header-left">
+          <div class="exp-org">JamiiAfrica</div>
+          <div class="exp-role">Programmes Officer</div>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-date">Aug 2019 – Mar 2022</span>
+          <span class="exp-loc">Dar es Salaam, Tanzania</span>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>Led the creation and publication of high-impact advocacy content on human rights, social justice, good governance and democracy.</li>
+          <li>Developed and implemented strategic communication plans to ensure accuracy and relevance of advocacy messaging.</li>
+          <li>Managed the content lifecycle on the Jamii Forums platform, overseeing editing, proofreading and quality control.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-header-left">
+          <div class="exp-org">Economic Patriotic Front Organization (EPFO)</div>
+          <div class="exp-role">Programme Officer</div>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-date">Jul 2018 – Aug 2019</span>
+          <span class="exp-loc">Morogoro, Tanzania</span>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>Spearheaded the design and strategic planning of empowerment projects targeting children, students and women.</li>
+          <li>Developed programmes focused on building essential economic skills enabling beneficiaries to improve future outcomes.</li>
+          <li>Managed end-to-end project lifecycle from conceptualisation to goal setting, aligning with the organisation's mission.</li>
+          <li>Collaborated with stakeholders to define project scope and resource allocation for multi-group empowerment initiatives.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

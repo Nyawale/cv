@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Francis Nyonzo – Engagements</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1a2e; --gold: #c9a84c; --gold-light: #e8d08a;
+    --cream: #faf8f3; --muted: #6b6b7b; --border: #e8e2d6;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); }
+  .section { padding: 52px 40px; max-width: 860px; margin: 0 auto; }
+  .section-label { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+  .section-label span { font-size: 10.5px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, var(--gold), transparent); opacity: 0.4; }
+  h2 { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; margin-bottom: 32px; }
+  h3 { font-family: 'Playfair Display', serif; font-size: 21px; font-weight: 700; margin-bottom: 18px; margin-top: 40px; color: var(--ink); }
+  h3:first-of-type { margin-top: 0; }
+
+  /* Conferences */
+  .conf-list { display: flex; flex-direction: column; gap: 14px; }
+  .conf-card {
+    background: white; border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px 20px; border-left: 4px solid var(--gold);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+    transition: transform 0.18s;
+  }
+  .conf-card:hover { transform: translateX(4px); }
+  .conf-meta { font-size: 11.5px; color: var(--muted); margin-bottom: 5px; }
+  .conf-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .conf-event { font-size: 13px; color: #555; margin-bottom: 4px; }
+  .conf-desc { font-size: 12.5px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+  .conf-link { display:inline-flex; align-items:center; gap:4px; margin-top:7px; font-size:11.5px; font-weight:600; color:var(--gold); text-decoration:none; border:1px solid rgba(201,168,76,0.3); border-radius:4px; padding:3px 10px; transition:background .2s, color .2s; }
+  .conf-link:hover { background:var(--gold); color:white; }
+
+  /* Two-col grid for awards & memberships */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .info-card {
+    background: white; border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px 18px; box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+    transition: transform 0.18s, box-shadow 0.18s;
+  }
+  .info-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.07); }
+  .info-icon { font-size: 22px; margin-bottom: 8px; }
+  .info-title { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+  .info-sub { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  .info-link { display:inline-flex; align-items:center; gap:4px; margin-top:7px; font-size:11px; font-weight:600; color:var(--gold); text-decoration:none; }
+  .info-link:hover { text-decoration: underline; }
+
+  /* Projects */
+  .proj-list { display: flex; flex-direction: column; gap: 14px; }
+  .proj-card { background: white; border:1px solid var(--border); border-radius:10px; padding:16px 20px; box-shadow:0 1px 6px rgba(0,0,0,0.04); }
+  .proj-status { font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:20px; background:rgba(46,204,113,0.12); color:#1a8a4a; display:inline-block; margin-bottom:8px; }
+  .proj-title { font-size:15px; font-weight:600; margin-bottom:5px; }
+  .proj-desc { font-size:13px; color:#555; line-height:1.6; font-weight:300; }
+
+  @media (max-width: 600px) {
+    .section { padding: 36px 20px; }
+    .two-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="section">
+  <div class="section-label"><span>Engagements</span></div>
+  <h2>Conferences, Awards &amp; Memberships</h2>
+
+  <!-- CONFERENCES -->
+  <h3>🎤 Conferences &amp; Seminars</h3>
+  <div class="conf-list">
+
+    <div class="conf-card">
+      <div class="conf-meta">Jun 2025 · University of Toronto Scarborough, Canada</div>
+      <div class="conf-title">The Digital Microfinance Model: Modern Way of Alleviating Poverty</div>
+      <div class="conf-event">Annual Conference of the Canadian Association of African Studies (CAAS)</div>
+      <a class="conf-link" href="https://cdn.prod.website-files.com/66f22a27ed56b73a8fd0277c/683d8175b8ba2850aafc7bdd_CAAS%20Conference%202025%20Programme%20BOOK_Final2.pdf" target="_blank" rel="noopener">↗ Programme Book</a>
+    </div>
+
+    <div class="conf-card">
+      <div class="conf-meta">Dec 2024 · Chicago, Illinois, United States</div>
+      <div class="conf-title">Challenges of Investigative Journalism in Tanzania</div>
+      <div class="conf-event">African Studies Association – 67th Annual Meeting</div>
+    </div>
+
+    <div class="conf-card">
+      <div class="conf-meta">Aug–Sep 2023 · Dar es Salaam, Tanzania</div>
+      <div class="conf-title">Assessing Tanzanians' Practical Reaction to Mobile Money Transaction Levy Implementation</div>
+      <div class="conf-event">8th Annual Congress: Contemporary Taxation Issues in Africa</div>
+    </div>
+
+    <div class="conf-card">
+      <div class="conf-meta">Sep 2023 · Gothenburg, Sweden (accepted; could not attend)</div>
+      <div class="conf-title">Tanzania's Investigative Journalists: A Look at the Difficulties of Exposing the Truth</div>
+      <div class="conf-event">2023 Global Investigative Journalism Conference</div>
+      <a class="conf-link" href="https://gijc2023.org/speaker/francisnyonzo/" target="_blank" rel="noopener">↗ Speaker Profile</a>
+    </div>
+
+  </div>
+
+  <!-- PROJECTS -->
+  <h3>🔬 Research Projects</h3>
+  <div class="proj-list">
+    <div class="proj-card">
+      <span class="proj-status">In Progress – Since 2022</span>
+      <div class="proj-title">The Digital Microfinance Model: Modern Way of Alleviating Poverty</div>
+      <div class="proj-desc">A theoretical paper emerging from an intensive literature review, developing proposals for a digital microfinance model applicable to developing economies, with a focus on Tanzania.</div>
+    </div>
+    <div class="proj-card">
+      <span class="proj-status">In Progress – Since 2024</span>
+      <div class="proj-title">The Hidden Strike</div>
+      <div class="proj-desc">This paper aims to demonstrate that the laziness and corruption of civil servants are reactions to unfavourable working conditions and low salaries — reframing the narrative around public sector performance.</div>
+    </div>
+  </div>
+
+  <!-- AWARDS -->
+  <h3>🏆 Honours &amp; Awards</h3>
+  <div class="two-col">
+    <div class="info-card">
+      <div class="info-icon">🥇</div>
+      <div class="info-title">Best Employee of the Month</div>
+      <div class="info-sub">JamiiAfrica · October 2023</div>
+      <a class="info-link" href="https://www.linkedin.com/feed/update/urn:li:activity:7125811199836856321" target="_blank" rel="noopener">↗ View on LinkedIn</a>
+    </div>
+    <div class="info-card">
+      <div class="info-icon">🌐</div>
+      <div class="info-title">Certificate of Appreciation</div>
+      <div class="info-sub">United Nations Volunteers · May 2022 · In recognition of service as an Online Volunteer contributing to international peace and development.</div>
+    </div>
+  </div>
+
+  <!-- MEMBERSHIPS -->
+  <h3>🤝 Networks &amp; Memberships</h3>
+  <div class="two-col">
+    <div class="info-card">
+      <div class="info-icon">📑</div>
+      <div class="info-title">African Tax Research Network (ATRN)</div>
+      <div class="info-sub">Pretoria, South Africa · Jul 2023 – Present · Reviewing academic and policy-oriented research papers to promote evidence-based tax policy across Africa.</div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon">🎓</div>
+      <div class="info-title">African Studies Association</div>
+      <div class="info-sub">New Jersey, United States · Nov 2024 – Present · International Emerging Scholar</div>
+      <a class="info-link" href="https://africanstudies.org/" target="_blank" rel="noopener">↗ africanstudies.org</a>
+    </div>
+  </div>
+
+  <!-- VOLUNTEERING -->
+  <h3>🤲 Volunteering</h3>
+  <div class="conf-list">
+    <div class="conf-card">
+      <div class="conf-meta">Feb – May 2022 · Online</div>
+      <div class="conf-title">Writing Analytical Articles on African Business Environments</div>
+      <div class="conf-desc">Conducted in-depth research on Tanzania's business environment leveraging expertise in financial inclusion and enterprise development to produce data-driven strategic analysis.</div>
+    </div>
+    <div class="conf-card">
+      <div class="conf-meta">Sep – Dec 2018 · Morogoro, Tanzania</div>
+      <div class="conf-title">ICS Volunteer – Entrepreneur Training</div>
+      <div class="conf-desc">Designed targeted instructional lessons and curriculum for entrepreneurs, facilitating learning sessions on essential business and professional skills.</div>
+    </div>
+  </div>
+
+  <!-- SOCIAL / COMMUNITY -->
+  <h3>🌱 Social &amp; Community Activities</h3>
+  <div class="conf-list">
+    <div class="conf-card">
+      <div class="conf-meta">Feb 2024 · Dar es Salaam, Tanzania</div>
+      <div class="conf-title">OP-ED Training for Young People</div>
+      <div class="conf-desc">Provided op-ed writing training to young people at the Eastern Africa Students for Liberty Tanzania Event, advancing African liberty through skills-building.</div>
+    </div>
+    <div class="conf-card">
+      <div class="conf-meta">Apr 2023 · Dar es Salaam, Tanzania</div>
+      <div class="conf-title">Financial Skills Training for Women Entrepreneurs</div>
+      <div class="conf-desc">Shared financial skills with women operating microenterprises in Magomeni, Dar es Salaam, including guidance on avoiding Ponzi schemes.</div>
+    </div>
+    <div class="conf-card">
+      <div class="conf-meta">Mar 2018 – Aug 2019 · Morogoro, Tanzania &amp; surrounding regions</div>
+      <div class="conf-title">Encouraging Reading Culture in Youth</div>
+      <div class="conf-desc">Engaged youth and students across Morogoro, Rukwa and Iringa regions to develop a reading culture and promote lifelong learning behaviours.</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Francis Nyonzo – Education</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1a2e;
+    --gold: #c9a84c;
+    --gold-light: #e8d08a;
+    --cream: #faf8f3;
+    --muted: #6b6b7b;
+    --border: #e8e2d6;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); }
+  .section { padding: 52px 40px; max-width: 860px; margin: 0 auto; }
+  .section-label {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 28px;
+  }
+  .section-label span {
+    font-size: 10.5px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); font-weight: 600;
+  }
+  .section-label::after {
+    content: ''; flex: 1; height: 1px; background: linear-gradient(to right, var(--gold), transparent); opacity: 0.4;
+  }
+  h2 { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; margin-bottom: 32px; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 6px; top: 10px; bottom: 10px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), rgba(201,168,76,0.1));
+    border-radius: 2px;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 32px;
+    animation: fadeSlide 0.5s ease both;
+  }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-item::before {
+    content: '';
+    position: absolute; left: -25px; top: 6px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--cream);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.25);
+  }
+  .tl-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .tl-card:hover { transform: translateX(4px); box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
+  .tl-meta {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 8px;
+  }
+  .tl-date {
+    font-size: 11px; font-weight: 600; color: var(--gold);
+    background: rgba(201,168,76,0.1); border-radius: 4px; padding: 3px 8px;
+    letter-spacing: 0.5px;
+  }
+  .tl-location {
+    font-size: 11.5px; color: var(--muted);
+    display: flex; align-items: center; gap: 4px;
+  }
+  .tl-location::before { content: '📍'; font-size: 10px; }
+  .tl-degree {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 4px;
+  }
+  .tl-institution {
+    font-size: 13.5px; font-weight: 500; color: #444;
+  }
+  .tl-institution a {
+    color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201,168,76,0.3);
+    transition: border-color 0.2s;
+  }
+  .tl-institution a:hover { border-color: var(--gold); }
+  .tl-badge {
+    display: inline-block; margin-top: 8px;
+    padding: 3px 10px; border-radius: 20px;
+    font-size: 11px; font-weight: 600;
+    background: linear-gradient(135deg, var(--gold), #a8861a);
+    color: white;
+  }
+  @keyframes fadeSlide { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+  @media (max-width: 600px) {
+    .section { padding: 36px 20px; }
+    .timeline { padding-left: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="section">
+  <div class="section-label"><span>Academic Background</span></div>
+  <h2>Education &amp; Training</h2>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="tl-card">
+        <div class="tl-meta">
+          <span class="tl-date">2023 – Present</span>
+          <span class="tl-location">Nairobi, Kenya</span>
+        </div>
+        <div class="tl-degree">Master of Arts in Digital Journalism</div>
+        <div class="tl-institution"><a href="https://www.aku.edu/uc-nbi/Pages/home.aspx" target="_blank" rel="noopener">Aga Khan University</a></div>
+        <span class="tl-badge">In Progress</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-card">
+        <div class="tl-meta">
+          <span class="tl-date">Aug 2024 – Jun 2025</span>
+          <span class="tl-location">East Lansing, United States</span>
+        </div>
+        <div class="tl-degree">Fulbright Exchange – Hubert H. Humphrey Fellow</div>
+        <div class="tl-institution"><a href="https://msu.edu/" target="_blank" rel="noopener">Michigan State University</a></div>
+        <span class="tl-badge">Fulbright Scholar</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-card">
+        <div class="tl-meta">
+          <span class="tl-date">Apr 2020 – Nov 2021</span>
+          <span class="tl-location">Dar es Salaam, Tanzania</span>
+        </div>
+        <div class="tl-degree">Master of Science in Economics</div>
+        <div class="tl-institution"><a href="https://www.out.ac.tz/" target="_blank" rel="noopener">The Open University of Tanzania</a></div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-card">
+        <div class="tl-meta">
+          <span class="tl-date">Oct 2013 – Nov 2016</span>
+          <span class="tl-location">Dodoma, Tanzania</span>
+        </div>
+        <div class="tl-degree">Bachelor of Arts in Economics</div>
+        <div class="tl-institution"><a href="https://www.udom.ac.tz/" target="_blank" rel="noopener">University of Dodoma</a></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Short Courses -->
+  <h2 style="margin-top:48px; font-size:24px;">Short Courses &amp; Training</h2>
+  <div class="timeline" style="margin-top:24px;">
+
+    <div class="timeline-item">
+      <div class="tl-card">
+        <div class="tl-meta"><span class="tl-date">Dec 2024</span></div>
+        <div class="tl-degree" style="font-size:15px;">Leading with Emotional Intelligence</div>
+        <div class="tl-institution"><a href="https://www.amanet.org/" target="_blank" rel="noopener">American Management Association</a></div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-card">
+        <div class="tl-meta"><span class="tl-date">Jun 2023</span></div>
+        <div class="tl-degree" style="font-size:15px;">Manage Successful Field Research</div>
+        <div class="tl-institution">World Bank Group – DIME Department</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-card">
+        <div class="tl-meta"><span class="tl-date">Jun 2022</span></div>
+        <div class="tl-degree" style="font-size:15px;">Manage Successful Impact Evaluation Surveys</div>
+        <div class="tl-institution">World Bank Group – DIME Department</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-card">
+        <div class="tl-meta"><span class="tl-date">May 2022</span></div>
+        <div class="tl-degree" style="font-size:15px;">Investigative Journalism</div>
+        <div class="tl-institution">African Centre for Media Excellence (ACME)</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-card">
+        <div class="tl-meta"><span class="tl-date">Mar 2022</span></div>
+        <div class="tl-degree" style="font-size:15px;">Introduction to Online Journalism</div>
+        <div class="tl-institution">Reuters</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-card">
+        <div class="tl-meta"><span class="tl-date">Sep – Nov 2021</span></div>
+        <div class="tl-degree" style="font-size:15px;">Research and Proposal Writing in the Sciences</div>
+        <div class="tl-institution">INASP – International Network for Advancing Science and Policy</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-card">
+        <div class="tl-meta"><span class="tl-date">Jul – Sep 2021</span></div>
+        <div class="tl-degree" style="font-size:15px;">Development Research in Practice</div>
+        <div class="tl-institution">World Bank Group – DIME Department</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-card">
+        <div class="tl-meta"><span class="tl-date">Jun – Jul 2021</span></div>
+        <div class="tl-degree" style="font-size:15px;">Research Writing in the Social Sciences</div>
+        <div class="tl-institution">INASP – International Network for Advancing Science and Policy</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

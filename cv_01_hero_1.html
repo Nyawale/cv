@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Francis Nyonzo – Hero</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1a2e;
+    --gold: #c9a84c;
+    --gold-light: #e8d08a;
+    --cream: #faf8f3;
+    --muted: #6b6b7b;
+  }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+  .hero {
+    background: var(--ink);
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 60px solid rgba(201,168,76,0.08);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 20%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 40px solid rgba(201,168,76,0.05);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    gap: 44px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .avatar-wrap {
+    flex-shrink: 0;
+    width: 148px; height: 148px;
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    overflow: hidden;
+    box-shadow: 0 0 0 8px rgba(201,168,76,0.15);
+    animation: fadeIn 0.8s ease both;
+  }
+  .avatar-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: center top;
+  }
+  .avatar-fallback {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #2a2a4a, #3a3a5a);
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .hero-text {
+    animation: slideUp 0.8s 0.1s ease both;
+  }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.05;
+    margin-bottom: 14px;
+  }
+  h1 span { color: var(--gold); }
+  .tagline {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+    max-width: 480px;
+    font-weight: 300;
+    margin-bottom: 26px;
+  }
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11.5px;
+    font-weight: 500;
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold-light);
+    background: rgba(201,168,76,0.07);
+    letter-spacing: 0.3px;
+  }
+  .social-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    animation: slideUp 0.8s 0.25s ease both;
+  }
+  .soc-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.05);
+  }
+  .soc-btn:hover {
+    background: var(--gold);
+    color: var(--ink);
+    border-color: var(--gold);
+    transform: translateY(-1px);
+  }
+  .soc-btn svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+  .contact-bar {
+    background: rgba(201,168,76,0.08);
+    border-top: 1px solid rgba(201,168,76,0.2);
+    padding: 18px 40px;
+  }
+  .contact-bar-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+  }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+  }
+  .contact-item a { color: var(--gold-light); text-decoration: none; }
+  .contact-item a:hover { text-decoration: underline; }
+  .contact-item svg { width: 14px; height: 14px; fill: var(--gold); flex-shrink: 0; }
+  @keyframes fadeIn { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: scale(1); } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 580px) {
+    .hero { padding: 40px 20px 36px; }
+    .hero-inner { flex-direction: column; gap: 24px; text-align: center; }
+    .badges, .social-row { justify-content: center; }
+    .contact-bar { padding: 16px 20px; }
+    .contact-bar-inner { flex-direction: column; gap: 12px; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="avatar-wrap">
+      <!-- Primary: first Google Drive photo; fallback: second photo; final fallback: initials -->
+      <img id="cv-photo" src="https://drive.google.com/thumbnail?id=1mgRAMqIGOtepDqZlcBE8rby_VGjADe38&sz=w400" 
+           alt="Francis Nyonzo"
+           onerror="this.src='https://drive.google.com/thumbnail?id=1kypXP3ygXZObncCm0wYbgQzsVMKSrFVW&sz=w400'; this.onerror=function(){this.style.display='none'; document.getElementById('cv-initials').style.display='flex';}">
+      <div class="avatar-fallback" id="cv-initials" style="display:none;">FN</div>
+    </div>
+    <div class="hero-text">
+      <p class="eyebrow">Curriculum Vitae</p>
+      <h1>Francis <span>Nyonzo</span></h1>
+      <p class="tagline">Economist, Researcher and programme manager working at the intersection of economics, digital democracy and development in East Africa.</p>
+      <div class="badges">
+        <span class="badge">Fulbright / Humphrey Fellow 2024–25</span>
+        <span class="badge">Master of Science in Economics>
+	<span class="badge">Bachelor of Arts in Economics</span>
+      </div>
+      <div class="social-row">
+        <a class="soc-btn" href="https://www.linkedin.com/in/francis-nyonzo-77b3b9242/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.58 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.57V9h3.55v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45C23.21 24 24 23.23 24 22.28V1.72C24 .77 23.21 0 22.22 0z"/></svg>
+          LinkedIn
+        </a>
+        <a class="soc-btn" href="https://x.com/nyawale" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X / Twitter
+        </a>
+        <a class="soc-btn" href="https://www.facebook.com/balozi.moro" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.79V24C19.62 23.1 24 18.1 24 12.07z"/></svg>
+          Facebook
+        </a>
+        <a class="soc-btn" href="https://www.instagram.com/nyawale_nyonzo/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          Instagram
+        </a>
+        <a class="soc-btn" href="https://scholar.google.com/citations?user=H3h_rfkAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 100 14 7 7 0 000-14z"/></svg>
+          Google Scholar
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="contact-bar">
+  <div class="contact-bar-inner">
+    <div class="contact-item">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      <a href="mailto:francisnyonzo@gmail.com">francisnyonzo@gmail.com</a>
+    </div>
+    <div class="contact-item">
+      <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C9.61 21 3 14.39 3 6.5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
+      (+255) 718 651 585
+    </div>
+    <div class="contact-item">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
+      Dar es Salaam, Tanzania
+    </div>
+  </div>
+</div>
+</body>
+</html>
