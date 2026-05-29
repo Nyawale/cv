@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Francis Nyonzo – Unified Curriculum Vitae</title>
+<title>Francis Nyonzo – Curriculum Vitae</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   /* GLOBAL STYLES & RESET */
@@ -76,7 +76,7 @@
     color: var(--ink);
   }
 
-  /* MODULE 1: HERO CONTAINER */
+  /* HERO CONTAINER */
   .hero {
     background: var(--ink);
     padding: 60px 40px 50px;
@@ -90,15 +90,6 @@
     width: 320px; height: 320px;
     border-radius: 50%;
     border: 60px solid rgba(201,168,76,0.08);
-    pointer-events: none;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -40px; left: 20%;
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    border: 40px solid rgba(201,168,76,0.05);
     pointer-events: none;
   }
   .hero-inner {
@@ -117,20 +108,10 @@
     border: 3px solid var(--gold);
     overflow: hidden;
     box-shadow: 0 0 0 8px rgba(201,168,76,0.15);
-    animation: fadeIn 0.8s ease both;
   }
   .avatar-wrap img {
     width: 100%; height: 100%; object-fit: cover;
     object-position: center top;
-  }
-  .avatar-fallback {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, #2a2a4a, #3a3a5a);
-    font-family: 'Playfair Display', serif;
-    font-size: 52px;
-    color: var(--gold);
-    font-weight: 700;
   }
   .hero-text { animation: slideUp 0.8s 0.1s ease both; }
   .eyebrow {
@@ -169,7 +150,7 @@
     background: rgba(201,168,76,0.07);
     letter-spacing: 0.3px;
   }
-  .social-row { display: flex; flex-wrap: wrap; gap: 10px; animation: slideUp 0.8s 0.25s ease both; }
+  .social-row { display: flex; flex-wrap: wrap; gap: 10px; }
   .soc-btn {
     display: inline-flex;
     align-items: center;
@@ -216,10 +197,9 @@
   .contact-item a:hover { text-decoration: underline; }
   .contact-item svg { width: 14px; height: 14px; fill: var(--gold); flex-shrink: 0; }
 
-  /* MODULE 2: ABOUT GRID */
+  /* ABOUT GRID */
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
   .about-text { font-size: 15px; line-height: 1.8; color: #3a3a4a; font-weight: 300; }
-  .about-text p + p { margin-top: 14px; }
   .pillars { display: flex; flex-direction: column; gap: 14px; }
   .pillar {
     display: flex;
@@ -230,9 +210,7 @@
     border-radius: 10px;
     border: 1px solid var(--border);
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    transition: transform 0.2s, box-shadow 0.2s;
   }
-  .pillar:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
   .pillar-icon {
     width: 36px; height: 36px; border-radius: 8px;
     background: linear-gradient(135deg, var(--gold), #a8861a);
@@ -247,21 +225,18 @@
   .chip {
     font-size: 12px; padding: 5px 12px; background: #fff;
     border: 1px solid var(--border); border-radius: 6px;
-    color: #444; font-weight: 400; transition: all 0.2s;
+    color: #444; font-weight: 400;
   }
-  .chip:hover { border-color: var(--gold); color: var(--ink); background: rgba(201,168,76,0.03); }
 
-  /* MODULE 3: EDUCATION TIMELINE */
+  /* EDUCATION TIMELINE */
   .timeline { position: relative; padding-left: 28px; }
   .timeline::before {
     content: '';
     position: absolute; left: 6px; top: 10px; bottom: 10px;
     width: 2px;
     background: linear-gradient(to bottom, var(--gold), rgba(201,168,76,0.1));
-    border-radius: 2px;
   }
-  .timeline-item { position: relative; margin-bottom: 32px; animation: fadeSlide 0.5s ease both; }
-  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-item { position: relative; margin-bottom: 24px; }
   .timeline-item::before {
     content: '';
     position: absolute; left: -25px; top: 6px;
@@ -269,55 +244,46 @@
     border-radius: 50%;
     background: var(--gold);
     border: 2px solid var(--cream);
-    box-shadow: 0 0 0 3px rgba(201,168,76,0.25);
   }
   .tl-card {
     background: white; border: 1px solid var(--border); border-radius: 12px;
-    padding: 20px 22px; box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 18px 22px; box-shadow: 0 2px 10px rgba(0,0,0,0.04);
   }
-  .tl-card:hover { transform: translateX(4px); box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
-  .tl-meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 8px; }
+  .tl-meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 6px; }
   .tl-date {
     font-size: 11px; font-weight: 600; color: var(--gold);
     background: rgba(201,168,76,0.1); border-radius: 4px; padding: 3px 8px;
-    letter-spacing: 0.5px;
   }
-  .tl-location { font-size: 11.5px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
-  .tl-location::before { content: '📍'; font-size: 10px; }
+  .tl-location { font-size: 11.5px; color: var(--muted); }
   .tl-degree { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
   .tl-institution { font-size: 13.5px; font-weight: 500; color: #444; }
-  .tl-institution a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201,168,76,0.3); transition: border-color 0.2s; }
-  .tl-institution a:hover { border-color: var(--gold); }
   .tl-badge { display: inline-block; margin-top: 8px; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; background: linear-gradient(135deg, var(--gold), #a8861a); color: white; }
 
-  /* MODULE 4: EXPERIENCE CONTAINER */
+  /* EXPERIENCE CONTAINER */
   .exp-list { display: flex; flex-direction: column; gap: 20px; }
   .exp-card {
     background: white; border: 1px solid var(--border); border-radius: 14px;
     overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-    transition: box-shadow 0.2s, transform 0.2s;
   }
-  .exp-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.09); transform: translateY(-2px); }
   .exp-header {
     display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start;
     padding: 20px 24px 16px; border-left: 4px solid var(--gold); gap: 10px;
   }
-  .exp-org { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 4px; }
-  .exp-role { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; color: var(--ink); line-height: 1.2; }
-  .exp-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; }
+  .exp-org { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+  .exp-role { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; color: var(--ink); }
+  .exp-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
   .exp-date { font-size: 12px; font-weight: 600; color: var(--gold); background: rgba(201,168,76,0.1); padding: 3px 10px; border-radius: 4px; }
   .exp-loc { font-size: 11.5px; color: var(--muted); }
   .exp-body { padding: 4px 24px 20px; }
-  .exp-body ul { list-style: none; margin: 0; padding: 0; }
+  .exp-body ul { list-style: none; }
   .exp-body ul li {
     position: relative; padding-left: 18px; font-size: 13.5px; color: #3a3a50; line-height: 1.7; margin-bottom: 6px; font-weight: 300;
   }
-  .exp-body ul li::before { content: '→'; position: absolute; left: 0; top: 0; color: var(--gold); font-size: 12px; line-height: 1.7; }
-  .current-badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; margin-bottom: 4px; text-transform: uppercase; }
+  .exp-body ul li::before { content: '→'; position: absolute; left: 0; top: 0; color: var(--gold); }
+  .current-badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 700; background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; text-transform: uppercase; }
 
-  /* MODULE 5: PUBLICATIONS COMPONENTS */
-  .sub-intro { font-size: 14px; color: var(--muted); margin-bottom: 36px; font-weight: 300; }
+  /* PUBLICATIONS COMPONENTS */
+  .sub-intro { font-size: 14px; color: var(--muted); margin-bottom: 24px; font-weight: 300; }
   .pub-group-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 18px; margin-top: 40px; display: flex; align-items: center; gap: 12px; }
   .pub-group-title:first-of-type { margin-top: 0; }
   .pub-group-title .dot { width: 10px; height: 10px; border-radius: 50%; }
@@ -327,64 +293,36 @@
   .pub-card {
     background: white; border: 1px solid var(--border); border-radius: 10px;
     padding: 16px 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.04); border-left: 4px solid transparent;
-    transition: transform 0.18s, box-shadow 0.18s;
   }
-  .pub-card:hover { transform: translateX(4px); box-shadow: 0 5px 18px rgba(0,0,0,0.07); }
   .pub-card.peer { border-left-color: var(--peer); }
   .pub-card.oped { border-left-color: var(--oped); }
   .pub-year { font-size: 11px; font-weight: 600; letter-spacing: 1px; padding: 2px 8px; border-radius: 3px; display: inline-block; margin-bottom: 7px; }
   .pub-card.peer .pub-year { background: rgba(26,110,74,0.1); color: var(--peer); }
   .pub-card.oped .pub-year { background: rgba(44,82,130,0.1); color: var(--oped); }
   .pub-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 5px; line-height: 1.4; }
-  .pub-title a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s, color 0.2s; }
-  .pub-title a:hover { color: var(--gold); border-bottom-color: var(--gold); }
   .pub-meta { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  .pub-desc { font-size: 13px; color: #555; margin-top: 6px; font-weight: 300; background: #fafafa; padding: 8px 12px; border-radius: 6px; border: 1px dashed var(--border); }
   .pub-citation { font-size: 11.5px; color: #888; margin-top: 5px; font-style: italic; }
-  .pub-link {
-    display: inline-flex; align-items: center; gap: 5px; margin-top: 8px; font-size: 11.5px; font-weight: 600;
-    color: var(--gold); text-decoration: none; border: 1px solid rgba(201,168,76,0.3); border-radius: 4px; padding: 3px 10px;
-    transition: background 0.2s, color 0.2s;
-  }
-  .pub-link:hover { background: var(--gold); color: white; }
 
-  /* MODULE 6: ENGAGEMENTS, AWARDS, AND CONFERENCES */
+  /* CONFERENCES & ADDITIONAL DETAILS */
   .conf-list { display: flex; flex-direction: column; gap: 14px; }
   .conf-card {
     background: white; border: 1px solid var(--border); border-radius: 10px;
     padding: 16px 20px; border-left: 4px solid var(--gold); box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-    transition: transform 0.18s;
   }
-  .conf-card:hover { transform: translateX(4px); }
   .conf-meta { font-size: 11.5px; color: var(--muted); margin-bottom: 5px; }
   .conf-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
   .conf-event { font-size: 13px; color: #555; margin-bottom: 4px; }
   .conf-desc { font-size: 12.5px; color: var(--muted); line-height: 1.6; font-weight: 300; }
-  .conf-link { display:inline-flex; align-items:center; gap:4px; margin-top:7px; font-size:11.5px; font-weight:600; color:var(--gold); text-decoration:none; border:1px solid rgba(201,168,76,0.3); border-radius:4px; padding:3px 10px; transition:background .2s, color .2s; }
-  .conf-link:hover { background:var(--gold); color:white; }
 
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .info-card {
     background: white; border: 1px solid var(--border); border-radius: 10px;
     padding: 16px 18px; box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-    transition: transform 0.18s, box-shadow 0.18s;
   }
-  .info-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.07); }
   .info-icon { font-size: 22px; margin-bottom: 8px; }
   .info-title { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
   .info-sub { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
-  .info-link { display:inline-flex; align-items:center; gap:4px; margin-top:7px; font-size:11px; font-weight:600; color:var(--gold); text-decoration:none; }
-  .info-link:hover { text-decoration: underline; }
-
-  .proj-list { display: flex; flex-direction: column; gap: 14px; }
-  .proj-card { background: white; border:1px solid var(--border); border-radius:10px; padding:16px 20px; box-shadow:0 1px 6px rgba(0,0,0,0.04); }
-  .proj-status { font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:20px; background:rgba(46,204,113,0.12); color:#1a8a4a; display:inline-block; margin-bottom:8px; }
-  .proj-title { font-size:15px; font-weight:600; margin-bottom:4px; }
-  .proj-desc { font-size:12.5px; color:var(--muted); line-height:1.6; font-weight:300; }
-
-  /* RESPONSIVE DESIGN MEDIA QUERIES */
-  @keyframes fadeIn { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: scale(1); } }
-  @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeSlide { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
 
   @media (max-width: 768px) {
     .about-grid, .two-col { grid-template-columns: 1fr; }
@@ -406,53 +344,30 @@
 <div class="hero">
   <div class="hero-inner">
     <div class="avatar-wrap">
-      <img id="cv-photo" src="https://drive.google.com/thumbnail?id=1mgRAMqIGOtepDqZlcBE8rby_VGjADe38&sz=w400" alt="Francis Nyonzo" onerror="this.src='https://drive.google.com/thumbnail?id=1kypXP3ygXZObncCm0wYbgQzsVMKSrFVW&sz=w400'; this.onerror=function(){this.style.display='none'; document.getElementById('cv-initials').style.display='flex';}">
-      <div class="avatar-fallback" id="cv-initials" style="display:none;">FN</div>
+      <img src="https://drive.google.com/thumbnail?id=1mgRAMqIGOtepDqZlcBE8rby_VGjADe38&sz=w400" alt="Francis Nyonzo">
     </div>
     <div class="hero-text">
       <p class="eyebrow">Curriculum Vitae</p>
       <h1>Francis <span>Nyonzo</span></h1>
-      <p class="tagline">Economist, Researcher and programme manager working at the intersection of economics, digital democracy and development in East Africa.</p>
+      <p class="tagline">Results-driven professional with a strong foundation in program management, specializing in economic research, digital democracy, and development initiatives in East Africa.</p>
       <div class="badges">
         <span class="badge">Fulbright / Humphrey Fellow 2024–25</span>
-        <span class="badge">Master of Science in Economics</span>
-        <span class="badge">Bachelor of Arts in Economics</span>
+        <span class="badge">MSc in Economics</span>
+        <span class="badge">BA in Economics</span>
       </div>
       <div class="social-row">
-        <a class="soc-btn" href="https://www.linkedin.com/in/francis-nyonzo-77b3b9242/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-          LinkedIn
-        </a>
-        <a class="soc-btn" href="https://x.com/FrancisNyonzo" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          Twitter / X
-        </a>
-        <a class="soc-btn" href="https://www.instagram.com/francis_nyonzo/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          Instagram
-        </a>
-        <a class="soc-btn" href="https://scholar.google.com/citations?user=H3h_rfkAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 100 14 7 7 0 000-14z"/></svg>
-          Google Scholar
-        </a>
+        <a class="soc-btn" href="https://scholar.google.com/citations?user=H3h_rfkAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <a class="soc-btn" href="https://www.linkedin.com/in/francis-nyonzo-77b3b9242/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
   </div>
 </div>
+
 <div class="contact-bar">
   <div class="contact-bar-inner">
-    <div class="contact-item">
-      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      <a href="mailto:fnyonzo@gmail.com">fnyonzo@gmail.com</a>
-    </div>
-    <div class="contact-item">
-      <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.57-.35-.11-.74-.03-1.01.24l-1.57 1.57c-2.83-1.44-5.15-3.76-6.59-6.59l1.57-1.57c.27-.27.35-.65.24-1.01-.38-1.11-.58-2.3-.58-3.53 0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
-      <span>+255 745 613 628</span>
-    </div>
-    <div class="contact-item">
-      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-      <span>Dar es Salaam, Tanzania</span>
-    </div>
+    <div class="contact-item">📬 <a href="mailto:francisnyonzo@gmail.com">francisnyonzo@gmail.com</a></div>
+    <div class="contact-item">📞 <span>+255 718 651 585</span></div>
+    <div class="contact-item">📍 <span>Dar es Salaam, Tanzania</span></div>
   </div>
 </div>
 
@@ -461,20 +376,18 @@
   <h2>About Me</h2>
   <div class="about-grid">
     <div class="about-text">
-      <p>I am a multifaceted development professional with a deep academic grounding in macroeconomics and public policy. Over the last decade, I have driven initiatives across East Africa focused on promoting digital civic spaces, building research capacity, and designing economic empowerment programmes.</p>
-      <p>My work combines structured quantitative insights with local community advocacy. As a dynamic communicator, I work to bridge the gap between rigorous technical findings and actionable development policies that empower citizens.</p>
+      <p>I am a dedicated professional with substantial experience in project oversight, stakeholder relations, and policy communication. My expertise links quantitative economic analysis with field project implementation, striving to maximize social outcomes through data-driven decisions and community advocacy.</p>
       <div class="skills-wrapper">
-        <h4>Core Expertise</h4>
+        <h4>Core Skills</h4>
         <div class="chips">
-          <span class="chip">Economic Policy</span>
-          <span class="chip">Programme Management</span>
-          <span class="chip">Digital Civic Tools</span>
-          <span class="chip">Data Analysis</span>
-          <span class="chip">Investigative Reporting</span>
-          <span class="chip">Stakeholder Relations</span>
-          <span class="chip">Capacity Building</span>
-          <span class="chip">Knowledge Management</span>
-          <span class="chip">STATA</span>
+          <span class="chip">Economic Research Analysis</span>
+          <span class="chip">Policy Briefs & Op-Eds</span>
+          <span class="chip">Data & Statistical Analysis</span>
+          <span class="chip">Programme & Project Management</span>
+          <span class="chip">Communication & Knowledge Management</span>
+          <span class="chip">Leadership & Capacity Building</span>
+          <span class="chip">STATA Coding</span>
+          <span class="chip">Cyber Security Basics</span>
         </div>
       </div>
     </div>
@@ -482,103 +395,16 @@
       <div class="pillar">
         <div class="pillar-icon">📊</div>
         <div class="pillar-content">
-          <h4>Economic Research & Policy</h4>
-          <p>Peer-reviewed publications on taxation, mobile money, trade and financial inclusion across East Africa.</p>
-        </div>
-      </div>
-      <div class="pillar">
-        <div class="pillar-icon">📰</div>
-        <div class="pillar-content">
-          <h4>Journalism & Media</h4>
-          <p>Worked in the media industry since 2016. Trained journalists, worked with advocacy and content teams.</p>
+          <h4>Economic Analysis</h4>
+          <p>Extensive tracking of trade integration, tax frameworks, and digital finance tools across the East African Community.</p>
         </div>
       </div>
       <div class="pillar">
         <div class="pillar-icon">🌍</div>
         <div class="pillar-content">
           <h4>Digital Democracy</h4>
-          <p>Programme Officer working to promote civic participation and democratic culture through digital tools.</p>
+          <p>Promoting civil spaces, transparency, and accountability ecosystems utilizing modern communication platforms.</p>
         </div>
-      </div>
-      <div class="pillar">
-        <div class="pillar-icon">🎓</div>
-        <div class="pillar-content">
-          <h4>Fulbright / HHH Fellow</h4>
-          <p>2024–25 Fulbright Hubert H. Humphrey Fellow at Michigan State University, East Lansing.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="section">
-  <div class="section-label"><span>Academic Journey</span></div>
-  <h2>Education</h2>
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="tl-card">
-        <div class="tl-meta">
-          <span class="tl-date">2024 – 2025</span>
-          <span class="tl-location">East Lansing, USA</span>
-        </div>
-        <div class="tl-degree">Fulbright Hubert H. Humphrey Fellowship</div>
-        <div class="tl-institution">Michigan State University</div>
-        <div class="tl-badge">Professional Development</div>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="tl-card">
-        <div class="tl-meta">
-          <span class="tl-date">2019 – 2021</span>
-          <span class="tl-location">Morogoro, Tanzania</span>
-        </div>
-        <div class="tl-degree">Master of Science in Economics</div>
-        <div class="tl-institution">Mzumbe University</div>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="tl-card">
-        <div class="tl-meta">
-          <span class="tl-date">2013 – 2016</span>
-          <span class="tl-location">Dodoma, Tanzania</span>
-        </div>
-        <div class="tl-degree">Bachelor of Arts in Economics</div>
-        <div class="tl-institution">The University of Dodoma</div>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="tl-card">
-        <div class="tl-meta"><span class="tl-date">May 2022</span></div>
-        <div class="tl-degree" style="font-size:15px;">Investigative Journalism and Data Analysis</div>
-        <div class="tl-institution">African Centre for Media Excellence (ACME)</div>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="tl-card">
-        <div class="tl-meta"><span class="tl-date">Mar 2022</span></div>
-        <div class="tl-degree" style="font-size:15px;">Introduction to Online Journalism</div>
-        <div class="tl-institution">Reuters</div>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="tl-card">
-        <div class="tl-meta"><span class="tl-date">Sep – Nov 2021</span></div>
-        <div class="tl-degree" style="font-size:15px;">Research and Proposal Writing in the Sciences</div>
-        <div class="tl-institution">INASP – International Network for Advancing Science and Policy</div>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="tl-card">
-        <div class="tl-meta"><span class="tl-date">Jul – Sep 2021</span></div>
-        <div class="tl-degree" style="font-size:15px;">Development Research in Practice</div>
-        <div class="tl-institution">World Bank Group – DIME Department</div>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="tl-card">
-        <div class="tl-meta"><span class="tl-date">Jun – Jul 2021</span></div>
-        <div class="tl-degree" style="font-size:15px;">Research Writing in the Social Sciences</div>
-        <div class="tl-institution">INASP / AuthorAID</div>
       </div>
     </div>
   </div>
@@ -590,32 +416,105 @@
   <div class="exp-list">
     <div class="exp-card">
       <div class="exp-header">
-        <div class="exp-header-left">
-          <div class="exp-org">Jamii Forums</div>
-          <div class="exp-role">Programme Officer – Digital Democracy</div>
+        <div>
+          <div class="exp-org">JamiiAfrica</div>
+          <div class="exp-role">Program Officer - Digital Democracy</div>
         </div>
         <div class="exp-meta">
-          <span class="current-badge">Current</span>
-          <span class="exp-date">Sep 2019 – Present</span>
+          <span class="exp-date">Jan 2025 – Feb 2026</span>
           <span class="exp-loc">Dar es Salaam, Tanzania</span>
         </div>
       </div>
       <div class="exp-body">
         <ul>
-          <li>Spearheaded the integration of open-data frameworks, transforming citizen data collection tools across public entities.</li>
-          <li>Managed cross-functional stakeholder networks across policy research, government relations, and media sectors.</li>
-          <li>Coordinated democratic tracking systems, compiling regular policy and analytics outputs for external development partners.</li>
-          <li>Oversaw the curation and publication of high-impact advocacy content on human rights, social justice, good governance and democracy.</li>
-          <li>Developed and implemented strategic communication plans to ensure accuracy and relevance of advocacy messaging.</li>
-          <li>Managed the content lifecycle on the Jamii Forums platform, overseeing editing, proofreading and quality control.</li>
+          <li>Promoted digital democracy frameworks by organizing and leading specialized training events for diverse stakeholder cohorts.</li>
+          <li>Analyzed program performance statistics and actively executed strategic adjustments to amplify local project outcomes.</li>
         </ul>
       </div>
     </div>
+
     <div class="exp-card">
       <div class="exp-header">
-        <div class="exp-header-left">
+        <div>
+          <div class="exp-org">Spartan Innovations</div>
+          <div class="exp-role">Program Coordination Intern</div>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-date">Jan 2025 – May 2025</span>
+          <span class="exp-loc">East Lansing, USA</span>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>Directed the daily logisitical operations of the corporate Accelerator program, ensuring operational efficiency and structural excellence.</li>
+          <li>Analyzed key program milestones and participant progress records to build evidence-based program tracking systems.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-org">JamiiAfrica</div>
+          <div class="exp-role">Head of Content Management Department</div>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-date">Mar 2022 – Jul 2024</span>
+          <span class="exp-loc">Dar es Salaam, Tanzania</span>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>Designed and coordinated comprehensive departmental content blueprints ensuring tight alignment with overarching organizational missions.</li>
+          <li>Mentored and coached junior content team members, fostering individual capacity building while scaling total delivery speed.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-org">Liberty Sparks</div>
+          <div class="exp-role">Research Associate</div>
+        </div>
+        <div class="exp-meta">
+          <span class="current-badge">Current</span>
+          <span class="exp-date">Jan 2023 – Present</span>
+          <span class="exp-loc">Dar es Salaam, Tanzania</span>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>Conducted quantitative and qualitative analysis on cross-border trading trends within the African Continental Free Trade Area (AfCFTA).</li>
+          <li>Translated technical insights into actionable policy articles, expanding institutional media outreach globally.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-org">JamiiAfrica</div>
+          <div class="exp-role">Programs Officer</div>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-date">Aug 2019 – Mar 2022</span>
+          <span class="exp-loc">Dar es Salaam, Tanzania</span>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>Curated high-impact advocacy content promoting social justice, anti-corruption, and accountability tools.</li>
+          <li>Supervised the complete lifecycle editing, proofreading, and verification of updates on the Jamii Forums workspace.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
           <div class="exp-org">Economic Patriotic Front Organization (EPFO)</div>
-          <div class="exp-role">Programme Officer</div>
+          <div class="exp-role">Program Officer</div>
         </div>
         <div class="exp-meta">
           <span class="exp-date">Jul 2018 – Aug 2019</span>
@@ -624,10 +523,8 @@
       </div>
       <div class="exp-body">
         <ul>
-          <li>Spearheaded the design and strategic planning of empowerment projects targeting children, students and women.</li>
-          <li>Developed programmes focused on building essential economic skills enabling beneficiaries to improve future outcomes.</li>
-          <li>Managed end-to-end project lifecycle from conceptualisation to goal setting, aligning with the organisation's mission.</li>
-          <li>Collaborated with stakeholders to define project scope and resource allocation for multi-group empowerment initiatives.</li>
+          <li>Managed end-to-end community project timelines focusing on financial inclusion networks for youth and women.</li>
+          <li>Partnered with external actors to establish scope matrices and track resource allocation across field training hubs.</li>
         </ul>
       </div>
     </div>
@@ -637,36 +534,116 @@
 <div class="section">
   <div class="section-label"><span>Research &amp; Writing</span></div>
   <h2>Publications</h2>
-  <p class="sub-intro">A selection of peer-reviewed academic articles and public commentary across economics, media, governance and development.</p>
+  <p class="sub-intro">A full log of peer-reviewed articles and commentary covering financial systems, cross-border trading, and digital rights infrastructure.</p>
   
-  <div class="pub-group-title"><span class="dot dot-peer"></span> Peer-Reviewed &amp; Academic Publications</div>
+  <div class="pub-group-title"><span class="dot dot-peer"></span> Peer-Reviewed &amp; Academic Papers</div>
   <div class="pub-list">
     <div class="pub-card peer">
       <span class="pub-year">2025</span>
-      <div class="pub-title">Denominational Inflation: Limited Currency Divisibility in Cash Payment Systems – Tanzania as a Case Study</div>
-      <div class="pub-meta">Francis Stephen Nyonzo &bull; <em>International Journal of Economics, Commerce and Management</em></div>
-      <div class="pub-citation">Vol. XIII, Issue 4, April 2025</div>
+      <div class="pub-title">Denominational inflation: Limited currency divisibility in cash payment systems - Tanzania as a case study</div>
+      <div class="pub-meta">Nyonzo, F. S. &bull; <em>Advanced Research in Economics and Business Strategy Journal</em></div>
+      <div class="pub-citation">Vol 6, Issue 1, p200-214. Publisher: University of Oran 2.</div>
     </div>
     <div class="pub-card peer">
       <span class="pub-year">2024</span>
-      <div class="pub-title"><a href="https://ijecm.co.uk/wp-content/uploads/2024/11/121124.pdf" target="_blank" rel="noopener">Mobile Money Interoperability and Financial Inclusion of Micro-Entrepreneurs in Dar es Salaam, Tanzania</a></div>
-      <div class="pub-meta">Francis Stephen Nyonzo &bull; <em>International Journal of Economics, Commerce and Management</em></div>
-      <div class="pub-citation">Vol. XII, Issue 11, November 2024</div>
-      <a class="pub-link" href="https://ijecm.co.uk/wp-content/uploads/2024/11/121124.pdf" target="_blank" rel="noopener">Read Paper</a>
+      <div class="pub-title">Assessing Tanzanians' Response to the Implementation of a Mobile Money Transaction Levy</div>
+      <div class="pub-meta">Nyonzo, F. &bull; <em>African Multidisciplinary Tax Journal</em></div>
+      <div class="pub-citation">Vol. 4, Issue 1, pp. 167-186.</div>
     </div>
     <div class="pub-card peer">
-      <span class="pub-year">2024</span>
-      <div class="pub-title"><a href="https://doi.org/10.5897/AJBM2024.9388" target="_blank" rel="noopener">Electronic Filing System and Tax Compliance among Small and Medium Enterprises in Kinondoni Municipal Council, Tanzania</a></div>
-      <div class="pub-meta">Francis Stephen Nyonzo &bull; <em>African Journal of Business Management</em></div>
-      <div class="pub-citation">Vol. 18(10), pp. 222-231, October 2024</div>
-      <a class="pub-link" href="https://doi.org/10.5897/AJBM2024.9388" target="_blank" rel="noopener">Read Paper</a>
+      <span class="pub-year">2022</span>
+      <div class="pub-title">Tanzania's solidarity tax</div>
+      <div class="pub-meta">Nyonzo, F. &bull; <em>Review of African Political Economy</em></div>
+      <div class="pub-citation">Vol. 49, Issue 174, pp. 643-651.</div>
     </div>
   </div>
 
-  <div class="pub-group-title"><span class="dot dot-oped"></span> Selected Op-Eds &amp; Professional Commentary</div>
+  <div class="pub-group-title"><span class="dot dot-oped"></span> Op-Eds &amp; Professional Commentary</div>
   <div class="pub-list">
     <div class="pub-card oped">
+      <span class="pub-year">2026</span>
+      <div class="pub-title">Preserving Democracy in Africa: Dispelling the Myth of 'Localising'</div>
+      <div class="pub-meta">The Chanzo</div>
+    </div>
+    <div class="pub-card oped">
+      <span class="pub-year">2026</span>
+      <div class="pub-title">When Desperation Turns Deadly: Could Tanzania's Magical Violence Really Be About Economic Pain?</div>
+      <div class="pub-meta">The Chanzo</div>
+    </div>
+    <div class="pub-card oped">
+      <span class="pub-year">2026</span>
+      <div class="pub-title">Beyond Tax Enforcement: A Mobile Money Strategy for Formalizing Tanzania's Informal Economy</div>
+      <div class="pub-meta">Liberty Sparks</div>
+    </div>
+    <div class="pub-card oped">
+      <span class="pub-year">2026</span>
+      <div class="pub-title">Mobile Money Could Be Africa's Most Powerful Tax Collector - If Governments Let It</div>
+      <div class="pub-meta">The Chanzo</div>
+    </div>
+    <div class="pub-card oped">
+      <span class="pub-year">2026</span>
+      <div class="pub-title">A Youth Bank in Name Only Won't Empower Tanzania's Young</div>
+      <div class="pub-meta">The Chanzo</div>
+    </div>
+    <div class="pub-card oped">
+      <span class="pub-year">2026</span>
+      <div class="pub-title">1.6GB a Month: The Barrier to Tanzania's Digital Transformation</div>
+      <div class="pub-meta">The Chanzo</div>
+    </div>
+    <div class="pub-card oped">
       <span class="pub-year">2024</span>
+      <div class="pub-title">Kenya, Tanzania Cat and Mouse Games Hurting Cross-Border Trade and Prosperity of their citizens</div>
+      <div class="pub-meta">Liberty Sparks</div>
+      <div class="pub-desc">An analysis of trade disputes within the EAC and their direct implications on micro-businesses reliant on intra-regional supply lines.</div>
+    </div>
+    <div class="pub-card oped">
+      <span class="pub-year">2024</span>
+      <div class="pub-title">Workers' Welfare: Failure of courts of trade unions</div>
+      <div class="pub-meta">Professional Essay</div>
+    </div>
+    <div class="pub-card oped">
+      <span class="pub-year">2024</span>
+      <div class="pub-title">No Tanzanian Child Should Be Dismissed From School for Indiscipline</div>
+      <div class="pub-meta">The Chanzo Initiative</div>
+    </div>
+    <div class="pub-card oped">
+      <span class="pub-year">2024</span>
+      <div class="pub-title">Uchawa Vs. Professional Networking: Understanding Key Differences</div>
+      <div class="pub-meta">The Chanzo Initiative</div>
+    </div>
+    <div class="pub-card oped">
+      <span class="pub-year">2024</span>
+      <div class="pub-title">Tanzania's Foreign Media Ownership Restrictions Impact Citizen's Freedom of Speech</div>
+      <div class="pub-meta">The Chanzo Initiative</div>
+    </div>
+    <div class="pub-card oped">
+      <span class="pub-year">2023</span>
+      <div class="pub-title">The Challenges of Free Education in Tanzania</div>
+      <div class="pub-meta">UN OHCHR Submission</div>
+      <div class="pub-desc">Evidence detailing how barriers regarding human rights frameworks limit basic institutional access for school-aged girls.</div>
+    </div>
+    <div class="pub-card oped">
+      <span class="pub-year">2023</span>
+      <div class="pub-title">Tanzania's Media Services Act: A Manifestation of the Man With the Hammer Syndrome?</div>
+      <div class="pub-meta">The Chanzo Initiative</div>
+    </div>
+    <div class="pub-card oped">
+      <span class="pub-year">2023</span>
+      <div class="pub-title">Tanzania's "Vagrancy Law" Crusade on Poor Citizens is Wrong</div>
+      <div class="pub-meta">The Chanzo Initiative</div>
+    </div>
+    <div class="pub-card oped">
+      <span class="pub-year">2023</span>
+      <div class="pub-title">Data bundle price hikes limit access to information in Tanzania, too</div>
+      <div class="pub-meta">Fesmedia Africa</div>
+    </div>
+    <div class="pub-card oped">
+      <span class="pub-year">2023</span>
+      <div class="pub-title">Will the East African Community Competition Authority Enhance Competition and Protect Consumers?</div>
+      <div class="pub-meta">Liberty Sparks</div>
+    </div>
+    <div class="pub-card oped">
+      <span class="pub-year">2023</span>
       <div class="pub-title">Towards a Seamless Payment System: Paving the Way for East African Integration</div>
       <div class="pub-meta">Liberty Sparks</div>
     </div>
@@ -677,90 +654,105 @@
     </div>
     <div class="pub-card oped">
       <span class="pub-year">2022</span>
-      <div class="pub-title">Legal and Financial Environment for Micro-Entrepreneurs in Tanzania</div>
+      <div class="pub-title">Legal and financial environment for micro-entrepreneurs in Tanzania</div>
       <div class="pub-meta">African Association of Entrepreneurs</div>
     </div>
     <div class="pub-card oped">
       <span class="pub-year">2022</span>
-      <div class="pub-title">Limitations of Online Survey Tools for Developing Countries</div>
+      <div class="pub-title">Limitations of online survey tools for developing countries</div>
       <div class="pub-meta">AuthorAid</div>
     </div>
     <div class="pub-card oped">
       <span class="pub-year">2022</span>
-      <div class="pub-title">Since 'Data is the New Oil', Researchers Must Become Skilled in Cyber Security</div>
+      <div class="pub-title">Since 'Data is the New Oil', researchers must become skilled in cyber security</div>
       <div class="pub-meta">AuthorAid</div>
     </div>
-  </div>
-
-  <div style="margin-top:28px; text-align:center;">
-    <a class="pub-link" href="https://scholar.google.com/citations?user=H3h_rfkAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener" style="padding: 8px 16px; font-size: 13px;">View Complete Scholar Profile</a>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-label"><span>Community &amp; Connections</span></div>
-  <h2>Engagements &amp; Projects</h2>
-  
-  <h3>🎤 Conferences &amp; Presentations</h3>
+  <div class="section-label"><span>Academic Background</span></div>
+  <h2>Education</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="tl-card">
+        <div class="tl-meta">
+          <span class="tl-date">2024 – 2025</span>
+          <span class="tl-location">East Lansing, USA</span>
+        </div>
+        <div class="tl-degree">Fulbright Exchange Program - Hubert H. Humphrey Fellow</div>
+        <div class="tl-institution">Michigan State University</div>
+        <div class="tl-badge">Professional Development</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-card">
+        <div class="tl-meta">
+          <span class="tl-date">2020 – 2021</span>
+          <span class="tl-location">Dar es Salaam, Tanzania</span>
+        </div>
+        <div class="tl-degree">Master of Science in Economics</div>
+        <div class="tl-institution">The Open University of Tanzania</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-card">
+        <div class="tl-meta">
+          <span class="tl-date">2013 – 2016</span>
+          <span class="tl-location">Dodoma, Tanzania</span>
+        </div>
+        <div class="tl-degree">Bachelor of Arts in Economics</div>
+        <div class="tl-institution">University of Dodoma</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label"><span>Speaking &amp; Track Record</span></div>
+  <h2>Conferences &amp; Presentations</h2>
   <div class="conf-list">
     <div class="conf-card">
-      <div class="conf-meta">Nov 2024 &bull; Michigan, USA</div>
-      <div class="conf-title">The Role of Digital Platforms in Advancing Democracy and Good Governance in Africa</div>
-      <div class="conf-event">Humphrey Seminar Series, Michigan State University</div>
-      <div class="conf-desc">Presented insights on how modern digital forums and open tools act as catalysts for policy changes and accountability environments across Sub-Saharan Africa.</div>
+      <div class="conf-meta">Jun 2025 &bull; Scarborough, Canada</div>
+      <div class="conf-title">The Digital Microfinance Model: Modern way of alleviating poverty</div>
+      <div class="conf-event">Canadian Association of African Studies Conference</div>
     </div>
     <div class="conf-card">
-      <div class="conf-meta">Sep 2022 &bull; Kampala, Uganda</div>
-      <div class="conf-title">Data-Driven Advocacy: Bridging Research and Public Policy</div>
-      <div class="conf-event">East Africa Media and Governance Summit</div>
-      <div class="conf-desc">Co-led a panel focused on mapping the gaps between academic micro-data and actionable community development policies.</div>
+      <div class="conf-meta">Dec 2024 &bull; Chicago, USA</div>
+      <div class="conf-title">Challenges of Investigative Journalism in Tanzania</div>
+      <div class="conf-event">African Studies Association 67th Annual Meeting</div>
+    </div>
+    <div class="conf-card">
+      <div class="conf-meta">Aug 2023 &bull; Dar es Salaam, Tanzania</div>
+      <div class="conf-title">Assessing Tanzanians' Practical Reaction to Mobile Money Transaction Levy Implementation</div>
+      <div class="conf-event">8th Annual Congress on Contemporary Taxation Issues in Africa</div>
     </div>
   </div>
+</div>
 
-  <h3>🏆 Honors &amp; Professional Associations</h3>
-  <div class="two-col" style="margin-top: 18px;">
+<div class="section">
+  <div class="section-label"><span>Affiliations &amp; Frameworks</span></div>
+  <h2>Memberships &amp; Tools</h2>
+  <div class="two-col">
     <div class="info-card">
-      <div class="info-icon">🏅</div>
-      <div class="info-title">Fulbright Fellowship Award</div>
-      <div class="info-sub">Granted by the US Department of State Bureau of Educational and Cultural Affairs (2024–25).</div>
+      <div class="info-icon">🌍</div>
+      <div class="info-title">African Tax Research Network (ATRN)</div>
+      <div class="info-sub">Active research paper reviewer assisting mainland fiscal knowledge dissemination.</div>
     </div>
     <div class="info-card">
-      <div class="info-icon">💼</div>
-      <div class="info-title">Tanzania Economic Association</div>
-      <div class="info-sub">Active professional registry member participating in regional macro-policy review groups.</div>
+      <div class="info-icon">🎓</div>
+      <div class="info-title">African Studies Association</div>
+      <div class="info-sub">Registered International Emerging Scholar.</div>
     </div>
-  </div>
-
-  <h3>📊 Selected Research Projects</h3>
-  <div class="proj-list" style="margin-top: 18px;">
-    <div class="proj-card">
-      <span class="proj-status">Completed</span>
-      <div class="proj-title">Mobile Ecosystems &amp; Informal Trade</div>
-      <div class="proj-desc">Field assessment evaluating structural costs and transaction delays encountered by micro-vendors utilizing cross-network digital endpoints.</div>
+    <div class="info-card">
+      <div class="info-icon">💻</div>
+      <div class="info-title">Stata Nudges (2025)</div>
+      <div class="info-sub">Wrote public replication analysis packages calculating tax compliance factors.</div>
     </div>
-    <div class="proj-card">
-      <span class="proj-status">Completed</span>
-      <div class="proj-title">Curriculum Design – Entrepreneur Training</div>
-      <div class="proj-desc">Designed targeted instructional lessons and curriculum for entrepreneurs, facilitating learning sessions on essential business and professional skills.</div>
-    </div>
-  </div>
-
-  <h3>🌱 Social &amp; Community Activities</h3>
-  <div class="conf-list" style="margin-top: 18px;">
-    <div class="conf-card">
-      <div class="conf-meta">Feb 2024 &bull; Dar es Salaam, Tanzania</div>
-      <div class="conf-title">OP-ED Training for Young People</div>
-      <div class="conf-desc">Provided op-ed writing training to young people at the Eastern Africa Students for Liberty Tanzania Event, advancing African liberty through skills-building.</div>
-    </div>
-    <div class="conf-card">
-      <div class="conf-meta">Apr 2023 &bull; Dar es Salaam, Tanzania</div>
-      <div class="conf-title">Financial Skills Training for Women Entrepreneurs</div>
-      <div class="conf-desc">Shared financial skills with women operating microenterprises in Magomeni, Dar es Salaam, including guidance on avoiding Ponzi schemes.</div>
-    </div>
-    <div class="conf-card">
-      <div class="conf-meta">Mar 2018 – Aug 2019 &bull; Morogoro, Tanzania</div>
-      <div class="conf-title">Encouraging Reading Culture in Youth</div>
-      <div class="conf-desc">Engaged youth and students across Morogoro, Rukwa and Iringa regions to develop a reading culture and promote lifelong learning behaviours.</div>
+    <div class="info-card">
+      <div class="info-icon">🏆</div>
+      <div class="info-title">UN Volunteer Registry</div>
+      <div class="info-sub">Awarded official Certificate of Appreciation for development research models.</div>
     </div>
   </div>
 </div>
