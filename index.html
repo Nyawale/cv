@@ -48,6 +48,7 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.35)}
 .nav-logo{
   font-family:'Cormorant Garamond',serif;
   font-size:19px;font-weight:700;color:#fff;white-space:nowrap;
+  position: relative; z-index: 251;
 }
 .nav-logo span{color:var(--gold)}
 .nav-links{display:flex;gap:20px;align-items:center}
@@ -63,6 +64,29 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.35)}
   background:var(--gold);color:var(--navy);transition:opacity .2s;
 }
 .nav-cta:hover{opacity:.88}
+
+/* Mobile Toggle Menu Styles */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 251;
+}
+.menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: #fff;
+  transition: transform 0.3s, opacity 0.3s;
+}
+/* Transforming Hamburger into an 'X' when active */
+.menu-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ══════════════════════════════════════════════
    HERO
@@ -128,6 +152,17 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.35)}
 .soc.gs:hover,.soc.oc:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-pale)}
 
 .hero-photo-wrap{position:relative;display:flex;justify-content:center;align-items:center}
+@media(max-width:640px){
+  .hero-photo-frame{
+      width:200px;
+      margin:auto;
+  }
+  .hero-photo-frame img,
+  .hero-photo-frame .pf{
+      width:200px;
+      height:250px;
+  }
+}
 .hero-photo-frame{position:relative;width:260px}
 .hero-photo-frame::before{content:'';position:absolute;top:18px;left:18px;right:-18px;bottom:-18px;border:1px solid rgba(201,152,26,.2);border-radius:4px;z-index:0}
 .hero-photo-frame img,.hero-photo-frame .pf{position:relative;z-index:1;width:260px;height:320px;object-fit:cover;object-position:center top;border-radius:4px;display:block}
@@ -402,11 +437,36 @@ footer{background:var(--navy);padding:44px 32px 30px;border-top:1px solid rgba(2
   .oped-grid{grid-template-columns:1fr}
   .cert-strip{grid-template-columns:1fr 1fr}
 }
-@media(max-width:640px){
+@media(max-width:768px){
   .nav-inner{padding:0 16px}
-  .nav-links .hide-mobile{display:none}
-  .hero-inner{padding:56px 16px 120px}
-  .hero-cbar{padding:12px 16px}
+  
+  /* Modern Full Screen Mobile Menu Overlay Toggle */
+  .menu-toggle { display: flex; }
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background: var(--navy2);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 80px 24px;
+    gap: 24px;
+    box-shadow: -4px 0 24px rgba(0,0,0,0.5);
+    transition: right 0.3s ease;
+    z-index: 250;
+  }
+  .nav-links.active { right: 0; }
+  .nav-links a { font-size: 14px; width: 100%; padding: 4px 0; }
+  .nav-cta { display: block; text-align: center; width: 100%; margin-top: 10px; }
+
+  /* Structural spacing fixes for mobile thumb scrolling */
+  .hero-inner{padding:56px 16px 140px}
+  .hero-cbar{padding:16px; position: static;} /* Static position lets items flow freely without overlapping content */
+  .hero-cbar-inner { gap: 14px; justify-content: center; }
   .sec{padding:52px 16px}
   .dark-sec,.alt-sec{padding:52px 0}
   .dark-sec .sec-wrap,.alt-sec .sec-wrap{padding:0 16px}
@@ -416,6 +476,10 @@ footer{background:var(--navy);padding:44px 32px 30px;border-top:1px solid rgba(2
   .el{text-align:left}
   .conf-card{grid-template-columns:1fr}
   .stata-grid{grid-template-columns:1fr}
+  
+  /* Fix layout bugs for tiny mobile viewports */
+  .rotary-banner { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
 }
 
 /* ══════════════════════════════════════════════
@@ -434,19 +498,27 @@ footer{background:var(--navy);padding:44px 32px 30px;border-top:1px solid rgba(2
 </head>
 <body>
 
-<!-- ══════════ NAV — always visible ══════════ -->
+<!-- ══════════ NAV ══════════ -->
 <nav id="main-nav">
   <div class="nav-inner">
     <div class="nav-logo">Francis <span>Nyonzo</span></div>
-    <div class="nav-links">
-      <a href="#about" class="hide-mobile">About</a>
+    
+    <!-- Mobile Hamburger Toggle Icon Button -->
+    <button class="menu-toggle" id="mobile-menu" aria-label="Toggle Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    
+    <div class="nav-links" id="nav-links">
+      <a href="#about">About</a>
       <a href="#services">Services</a>
-      <a href="#work" class="hide-mobile">Work</a>
+      <a href="#work">Work</a>
       <a href="#education">Education</a>
       <a href="#achievements">Achievements</a>
       <a href="#publications">Writings</a>
-      <a href="#conferences" class="hide-mobile">Conferences</a>
-      <a href="#gallery" class="hide-mobile">Gallery</a>
+      <a href="#conferences">Conferences</a>
+      <a href="#gallery">Gallery</a>
       <a href="mailto:francisnyonzo@gmail.com" class="nav-cta">Hire Me</a>
     </div>
   </div>
@@ -484,840 +556,39 @@ footer{background:var(--navy);padding:44px 32px 30px;border-top:1px solid rgba(2
 
       <div class="socials">
         <a class="soc li" href="https://www.linkedin.com/in/francis-nyonzo-77b3b9242/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.58 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.57V9h3.55v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45C23.21 24 24 23.23 24 22.28V1.72C24 .77 23.21 0 22.22 0z"/></svg>LinkedIn</a>
-        <a class="soc tw" href="https://x.com/nyawale" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X / Twitter</a>
-        <a class="soc fb" href="https://www.facebook.com/balozi.moro" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.79V24C19.62 23.1 24 18.1 24 12.07z"/></svg>Facebook</a>
-        <a class="soc ig" href="https://www.instagram.com/nyawale_nyonzo/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>Instagram</a>
-        <a class="soc gs" href="https://scholar.google.com/citations?user=H3h_rfkAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 100 14 7 7 0 000-14z"/></svg>Google Scholar</a>
-        <a class="soc oc" href="https://orcid.org/0000-0002-5434-0401" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 01-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 3.912-1.584 3.912-3.722 0-2.016-1.428-3.722-3.912-3.722h-2.297z"/></svg>ORCID</a>
+          <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          LinkedIn
+        </a>
       </div>
     </div>
-
+    
     <div class="hero-photo-wrap">
       <div class="hero-photo-frame">
-        <img id="hero-img"
-          src="https://drive.google.com/thumbnail?id=1mgRAMqIGOtepDqZlcBE8rby_VGjADe38&sz=w600"
-          alt="Francis Nyonzo"
-          onerror="this.src='https://drive.google.com/thumbnail?id=1kypXP3ygXZObncCm0wYbgQzsVMKSrFVW&sz=w600';this.onerror=function(){this.style.display='none';document.getElementById('hero-fb').style.display='flex'}">
-        <div class="pf" id="hero-fb">FN</div>
+        <div class="pf" style="display:flex;">FN</div>
       </div>
     </div>
   </div>
 
   <div class="hero-cbar">
     <div class="hero-cbar-inner">
-      <div class="ci"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><a href="mailto:francisnyonzo@gmail.com">francisnyonzo@gmail.com</a></div>
-      <div class="ci"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C9.61 21 3 14.39 3 6.5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>(+255) 718 651 585</div>
-      <div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>Dar es Salaam, Tanzania</div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ ABOUT ══════════ -->
-<section id="about" class="dark-sec">
-  <div class="sec-wrap">
-    <div class="sh">
-      <p class="ey gold">Who I Am</p>
-      <h2 class="h2 light">Economist, Author &amp; <em>Researcher</em></h2>
-    </div>
-    <div class="about-grid">
-      <div class="about-body">
-        <p>I am a Tanzanian <strong>economist, researcher and digital governance specialist</strong> with expertise in public policy, taxation, financial inclusion, media freedom and development research. I have experience working in programme management, policy analysis, academic research and digital journalism across local and international platforms.</p>
-        <p>My research concentrates on <strong>digital economy, taxation, mobile money, mobile fraud, regional trade integration, behavioural economics and economics of crime</strong> — sustained focus on East Africa. My newsroom career began in 2016 as a <strong>News Reporter at The Guardian Limited</strong>, Tanzania's leading English-language newspaper.</p>
-        <p>As a <strong>Fulbright Hubert H. Humphrey Fellow</strong> at Michigan State University (2024–25), I deepened expertise in data science, behavioural economics and international trade policy. I am now a <strong>Rotary Peace Fellow</strong> (2026–27), pursuing a PGD in Peace Building &amp; Conflict Transformation at Makerere University, Uganda.</p>
-        <p>I am a <strong>Writing Fellow at African Liberty</strong> and an active peer reviewer for the African Tax Research Network (ATRN). I provide research, writing, training and consultancy services to organisations, researchers, media institutions and development partners.</p>
-        <div class="id-chips">
-          <span class="idc r">☮ Rotary Peace Fellow 2026–27</span>
-          <span class="idc g">Fulbright HHH Fellow</span>
-          <span class="idc t">ATRN Peer Reviewer</span>
-          <span class="idc e">African Liberty Fellow</span>
-          <span class="idc t">African Studies Assoc.</span>
-          <span class="idc g">ORCID Researcher</span>
-        </div>
-      </div>
-      <div class="pillars">
-        <div class="pillar"><div class="pil-icon">📊</div><div><h4>Economic Research &amp; Policy</h4><p>Peer-reviewed work on taxation, mobile money, denominational inflation, AfCFTA trade, digital finance and fraud prevention.</p></div></div>
-        <div class="pillar"><div class="pil-icon">☮️</div><div><h4>Peace Building &amp; Conflict</h4><p>Incoming Rotary Peace Fellow (2026–27) pursuing PGD in Peace Building &amp; Conflict Transformation at Makerere University.</p></div></div>
-        <div class="pillar"><div class="pil-icon">🗞️</div><div><h4>Journalism &amp; Media Freedom</h4><p>Investigative and advocacy journalist writing on digital rights, press freedom, governance and social justice across Africa.</p></div></div>
-        <div class="pillar"><div class="pil-icon">🌍</div><div><h4>Digital Democracy</h4><p>Promoting civic participation, transparency and accountability through digital tools, training and community mobilisation.</p></div></div>
+      <div class="ci">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <a href="mailto:francisnyonzo@gmail.com">francisnyonzo@gmail.com</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════ SERVICES ══════════ -->
-<section id="services">
-  <div class="sec">
-    <div class="sh">
-      <p class="ey teal">What I Offer</p>
-      <h2 class="h2">Professional <em>Services</em></h2>
-    </div>
-    <div class="services-grid">
-      <div class="srv-card">
-        <div class="srv-icon">🔬</div>
-        <div class="srv-title">Research &amp; Policy</div>
-        <ul class="srv-list">
-          <li>Economic research and policy analysis</li>
-          <li>Tax policy &amp; informal sector research</li>
-          <li>Mobile money and digital finance research</li>
-          <li>East African regional integration &amp; trade analysis</li>
-          <li>Monitoring and evaluation (M&amp;E)</li>
-          <li>Literature reviews and policy briefs</li>
-          <li>Research proposal and grant writing</li>
-          <li>Academic editing and proofreading</li>
-          <li>STATA data analysis and interpretation</li>
-        </ul>
-      </div>
-      <div class="srv-card terra">
-        <div class="srv-icon">✍️</div>
-        <div class="srv-title">Writing &amp; Media</div>
-        <ul class="srv-list">
-          <li>Op-ed and analytical article writing</li>
-          <li>Investigative journalism support</li>
-          <li>Policy communication &amp; knowledge translation</li>
-          <li>Content strategy and editorial management</li>
-          <li>Ghostwriting for research-based articles</li>
-          <li>Report writing and publication support</li>
-          <li>Data-driven advocacy content</li>
-        </ul>
-      </div>
-      <div class="srv-card gold">
-        <div class="srv-icon">🎓</div>
-        <div class="srv-title">Training &amp; Capacity Building</div>
-        <ul class="srv-list">
-          <li>Research methods training</li>
-          <li>Financial literacy training for entrepreneurs</li>
-          <li>Digital democracy &amp; civic education</li>
-          <li>Proposal writing mentorship</li>
-          <li>STATA / SPSS statistical software training</li>
-          <li>Digital safety &amp; tech-facilitated violence</li>
-        </ul>
-      </div>
-      <div class="srv-card rotary">
-        <div class="srv-icon">🌐</div>
-        <div class="srv-title">Consultancy Areas</div>
-        <ul class="srv-list">
-          <li>Public policy &amp; governance</li>
-          <li>Tax systems and informal economy</li>
-          <li>Digital governance</li>
-          <li>Financial inclusion &amp; mobile money</li>
-          <li>Digital rights</li>
-          <li>Social and economic development</li>
-          <li>Cross-border trade analysis in East Africa</li>
-        </ul>
-      </div>
-      <div class="srv-card" style="grid-column:span 2">
-        <div class="srv-icon">🎯</div>
-        <div class="srv-title">Specialised Niche Services</div>
-        <ul class="srv-list" style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px">
-          <li>Mobile money taxation analysis</li>
-          <li>Informal sector formalisation strategies</li>
-          <li>Digital economy policy research</li>
-          <li>Mobile money fraud &amp; behavioural security</li>
-          <li>Academic peer review &amp; journal support</li>
-          <li>Denominational inflation research</li>
-        </ul>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:32px">
-      <a href="mailto:francisnyonzo@gmail.com" style="display:inline-flex;align-items:center;gap:8px;padding:13px 32px;border-radius:4px;background:var(--teal);color:#fff;font-size:14px;font-weight:600;transition:opacity .2s" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
-        📩 Get in Touch — francisnyonzo@gmail.com
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ WORK EXPERIENCE ══════════ -->
-<section id="work" class="alt-sec">
-  <div class="sec-wrap">
-    <div class="sh">
-      <p class="ey gold">Career</p>
-      <h2 class="h2 light">Work <em>Experience</em></h2>
-    </div>
-    <div class="exp-list">
-      <div class="exp-row">
-        <span class="ep">Jan 2025 – Feb 2026</span>
-        <div><div class="er">Programme Officer – Digital Democracy <span class="curr-chip">Recent</span></div><div class="eo">JamiiAfrica</div></div>
-        <span class="el">Dar es Salaam, Tanzania</span>
-      </div>
-      <div class="exp-row">
-        <span class="ep">Jan – May 2025</span>
-        <div><div class="er">Programme Coordination Intern</div><div class="eo">Spartan Innovations · Michigan State University</div></div>
-        <span class="el">East Lansing, USA</span>
-      </div>
-      <div class="exp-row">
-        <span class="ep">Feb 2023 – Present</span>
-        <div><div class="er">Research Associate <span class="curr-chip">Current</span></div><div class="eo">Liberty Sparks</div></div>
-        <span class="el">Dar es Salaam, Tanzania</span>
-      </div>
-      <div class="exp-row">
-        <span class="ep">2022 – Jul 2024</span>
-        <div><div class="er">Head of Content Management Department</div><div class="eo">JamiiAfrica</div></div>
-        <span class="el">Dar es Salaam, Tanzania</span>
-      </div>
-      <div class="exp-row">
-        <span class="ep">Feb – May 2022</span>
-        <div><div class="er">United Nations Volunteer (UNV)</div><div class="eo">African Association of Entrepreneurs</div></div>
-        <span class="el">Online</span>
-      </div>
-      <div class="exp-row">
-        <span class="ep">2019 – Mar 2022</span>
-        <div><div class="er">Programmes Officer</div><div class="eo">JamiiAfrica</div></div>
-        <span class="el">Dar es Salaam, Tanzania</span>
-      </div>
-      <div class="exp-row">
-        <span class="ep">Jul 2018 – 2019</span>
-        <div><div class="er">Project Manager</div><div class="eo">Mwanga Mpya Organization (EPFO)</div></div>
-        <span class="el">Morogoro, Tanzania</span>
-      </div>
-      <div class="exp-row">
-        <span class="ep">Sep – Dec 2018</span>
-        <div><div class="er">ICS Volunteer</div><div class="eo">Raleigh Tanzania</div></div>
-        <span class="el">Morogoro, Tanzania</span>
-      </div>
-      <div class="exp-row terra gold">
-        <span class="ep">Sep – Dec 2016</span>
-        <div><div class="er">News Reporter</div><div class="eo">The Guardian Limited</div></div>
-        <span class="el">Dar es Salaam, Tanzania</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ EDUCATION ══════════ -->
-<section id="education" class="dark-sec">
-  <div class="sec-wrap">
-    <div class="sh">
-      <p class="ey gold">Academic Background</p>
-      <h2 class="h2 light">Education &amp; <em>Training</em></h2>
-    </div>
-
-    <div class="rotary-card">
-      <div class="rc-icon">☮️</div>
-      <div>
-        <div class="rc-label">Rotary Peace Fellowship — Incoming 2026–27</div>
-        <div class="rc-degree">Postgraduate Diploma in Peace Building &amp; Conflict Transformation</div>
-        <div class="rc-inst">Makerere University · Kampala, Uganda</div>
-        <div class="rc-meta">Awarded through the Rotary Foundation's prestigious Peace Fellowship — one of the most competitive international scholarships for peacebuilders and conflict resolution practitioners worldwide.</div>
-        <span class="rotary-badge">🕊 Rotary Peace Fellow</span>
-      </div>
-    </div>
-
-    <div class="edu-grid">
-      <div class="edu-card bl">
-        <span class="edu-date">2024 – 2025</span>
-        <div class="edu-degree">Fulbright Exchange — Hubert H. Humphrey Fellowship</div>
-        <div class="edu-inst"><a href="https://www.isp.msu.edu/international-centers-units/student-scholar-programs/humphrey-fellowship-program/profiles/humphrey-fellows/nyonzo" target="_blank">Michigan State University</a></div>
-        <div class="edu-loc">East Lansing, Michigan, USA · Economic Development (Professional, Non-Degree)</div>
-        <span class="edu-badge" style="background:linear-gradient(135deg,#0a66c2,#074a8c)">Fulbright Scholar</span>
-      </div>
-      <div class="edu-card">
-        <span class="edu-date">2020 – 2021</span>
-        <div class="edu-degree">Master of Science in Economics</div>
-        <div class="edu-inst"><a href="https://www.out.ac.tz/" target="_blank">The Open University of Tanzania</a></div>
-        <div class="edu-loc">Dar es Salaam, Tanzania</div>
-      </div>
-      <div class="edu-card">
-        <span class="edu-date">2013 – 2016</span>
-        <div class="edu-degree">Bachelor of Arts in Economics</div>
-        <div class="edu-inst"><a href="https://www.udom.ac.tz/" target="_blank">University of Dodoma</a></div>
-        <div class="edu-loc">Dodoma, Tanzania</div>
-      </div>
-      <div class="edu-card tb">
-        <span class="edu-date">2013</span>
-        <div class="edu-degree">Advanced Certificate of Secondary Education</div>
-        <div class="edu-inst">Mbezi Beach High School</div>
-        <div class="edu-loc">Dar es Salaam, Tanzania</div>
-      </div>
-      <div class="edu-card tb">
-        <span class="edu-date">2009</span>
-        <div class="edu-degree">Certificate of Secondary Education</div>
-        <div class="edu-inst">St. Francis De Sales</div>
-        <div class="edu-loc">Tanzania</div>
-      </div>
-    </div>
-
-    <h3 style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:#fff;margin:36px 0 14px">Short Courses &amp; Professional Training</h3>
-    <div class="courses-grid">
-      <div class="course-item"><div class="cy">Dec 2024</div><div class="cn">Leading with Emotional Intelligence</div><div class="co">American Management Association</div></div>
-      <div class="course-item"><div class="cy">Jun 2023</div><div class="cn">Manage Successful Field Research</div><div class="co">World Bank Group – DIME</div></div>
-      <div class="course-item"><div class="cy">Jun 2022</div><div class="cn">Manage Successful Impact Evaluation Surveys</div><div class="co">World Bank Group – DIME</div></div>
-      <div class="course-item"><div class="cy">May 2022</div><div class="cn">Investigative Journalism</div><div class="co">African Centre for Media Excellence (ACME)</div></div>
-      <div class="course-item"><div class="cy">Mar 2022</div><div class="cn">Introduction to Online Journalism</div><div class="co">Reuters</div></div>
-      <div class="course-item"><div class="cy">Sep – Nov 2021</div><div class="cn">Research and Proposal Writing in the Sciences</div><div class="co">INASP</div></div>
-      <div class="course-item"><div class="cy">Jul – Sep 2021</div><div class="cn">Development Research in Practice</div><div class="co">World Bank Group – DIME</div></div>
-      <div class="course-item"><div class="cy">Jun – Jul 2021</div><div class="cn">Research Writing in the Social Sciences</div><div class="co">INASP</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ ACHIEVEMENTS ══════════ -->
-<section id="achievements">
-  <div class="sec">
-    <div class="sh">
-      <p class="ey teal">Milestones</p>
-      <h2 class="h2">Awards, Fellowships &amp; <em>Honours</em></h2>
-    </div>
-    <div class="ach-grid">
-      <div class="ach-card rot">
-        <div class="ai">☮️</div>
-        <div class="at">Rotary Peace Fellow 2026–27</div>
-        <div class="ad">Awarded the Rotary Foundation Peace Fellowship — one of the world's most competitive peace scholarships — to pursue a PGD in Peace Building &amp; Conflict Transformation at Makerere University, Uganda.</div>
-      </div>
-      <div class="ach-card">
-        <div class="ai">🇺🇸</div>
-        <div class="at">Fulbright Hubert H. Humphrey Fellow 2024–25</div>
-        <div class="ad">Selected for the prestigious Fulbright HHH Fellowship at Michigan State University — one of the most competitive U.S. exchange programmes for mid-career professionals from the developing world.</div>
-        <a class="al" href="https://www.isp.msu.edu/international-centers-units/student-scholar-programs/humphrey-fellowship-program/profiles/humphrey-fellows/nyonzo" target="_blank">↗ MSU Profile</a>
-      </div>
-      <div class="ach-card">
-        <div class="ai">✍️</div>
-        <div class="at">African Liberty Writing Fellow 2023–24</div>
-        <div class="ad">Writing Fellow at African Liberty — a Students For Liberty project — producing op-eds and policy commentary advancing individual freedom and democracy across Africa.</div>
-        <a class="al" href="https://www.africanliberty.org/fellows/" target="_blank">↗ African Liberty</a>
-      </div>
-      <div class="ach-card">
-        <div class="ai">📊</div>
-        <div class="at">AEA / ASSA 2025 Invited Presenter</div>
-        <div class="ad">Invited to present two papers at the Allied Social Science Associations (ASSA) Annual Meeting — on economics of discrimination &amp; identity, and petty corruption in Tanzania's public sector.</div>
-        <a class="al" href="https://www.aeaweb.org/conference/2025/program/1951?q=eNqrVipOLS7OzM8LqSxIVbKqhnGVrJQMlWp1lJITS1LT84sqgXwlHaXE4uL8ZAizJLUoF8JKSYTKlmTmpkJYZZmp5SDDigoKgAKmBiCTChLTQbJmSrVcMFnqXCJl" target="_blank">↗ Paper 1</a>
-        <a class="al g" href="https://www.aeaweb.org/conference/2025/program/2023?q=eNqrVipOLS7OzM8LqSxIVbKqhnGVrJQMlWp1lJITS1LT84sqgXwlHaXE4uL8ZAizJLUoF8JKSYTKlmTmpkJYZZmp5SDDigoKgAKmBiCTChLTQbKGQA5cMHwsXCKQ" target="_blank">↗ Paper 2</a>
-      </div>
-      <div class="ach-card">
-        <div class="ai">🌐</div>
-        <div class="at">Mandela Washington Fellowship — Reader</div>
-        <div class="ad">Recognised (Nov 2024) for serving as an application reader for the 2025 Mandela Washington Fellowship for Young African Leaders, in partnership with IREX.</div>
-      </div>
-      <div class="ach-card">
-        <div class="ai">🤝</div>
-        <div class="at">Community Solutions Programme — Selection Committee</div>
-        <div class="ad">Recognised (Jan 2025) for serving as a Selection Committee member for the 2025 Community Solutions Programme, supporting IREX in selecting global community leaders.</div>
-      </div>
-      <div class="ach-card">
-        <div class="ai">🏆</div>
-        <div class="at">Black History Month Quiz Winner (2023)</div>
-        <div class="ad">Won the Black History Month Quiz at the U.S. Embassy in Tanzania, meeting H.E. Michael Battle, then U.S. Ambassador to Tanzania, on March 15, 2023.</div>
-      </div>
-      <div class="ach-card">
-        <div class="ai">🥇</div>
-        <div class="at">Best Employee of the Month</div>
-        <div class="ad">Recognised as Best Employee of the Month at JamiiAfrica (October 2023) for exceptional commitment and contributions.</div>
-        <a class="al" href="https://www.linkedin.com/feed/update/urn:li:activity:7125811199836856321" target="_blank">↗ LinkedIn</a>
-      </div>
-      <div class="ach-card">
-        <div class="ai">📖</div>
-        <div class="at">Co-authored Book — 2018</div>
-        <div class="ad"><em>Mambo 100 ya Kuzingatiwa na Mwanafunzi wa Kiafrika Karne ya 21</em>, co-authored with Justine Kakoko. DL Publishers, Arusha. ISBN 978-9976-5274-0-7.</div>
-      </div>
-    </div>
-
-    <!-- Certificates -->
-    <h3 style="font-size:20px;font-family:'Cormorant Garamond',serif;font-weight:700;margin:36px 0 16px;color:var(--ink)">Certificates &amp; Letters</h3>
-    <div class="cert-strip">
-      <div class="cert-card">
-        <div class="cert-icon">📜</div>
-        <div class="cert-title">UN Volunteers Certificate</div>
-        <div class="cert-org">United Nations Volunteers, 2022</div>
-        <a class="cert-link" href="https://github.com/Nyawale/cv/blob/main/Francis%20Nyonzo%20Certificate%20UNV.pdf" target="_blank">↗ View Certificate</a>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">🌍</div>
-        <div class="cert-title">Development Research in Practice</div>
-        <div class="cert-org">World Bank Group – DIME, 2021</div>
-        <a class="cert-link" href="https://github.com/Nyawale/cv/blob/main/World%20Bank%20Group's%20DIME%20certificate.pdf" target="_blank">↗ View Certificate</a>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">🧠</div>
-        <div class="cert-title">Emotional Intelligence</div>
-        <div class="cert-org">American Management Association, 2024</div>
-        <a class="cert-link" href="https://github.com/Nyawale/cv/blob/main/Emotional%20Intelligence%20-Certificate.pdf" target="_blank">↗ View Certificate</a>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">📡</div>
-        <div class="cert-title">Communications Certificate</div>
-        <div class="cert-org">Professional Communications</div>
-        <a class="cert-link" href="https://github.com/Nyawale/cv/blob/main/Francis%20Nyonzo%20-%20Communications.pdf" target="_blank">↗ View Certificate</a>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">💼</div>
-        <div class="cert-title">Raleigh Recommendation Letter</div>
-        <div class="cert-org">Raleigh Tanzania, 2018</div>
-        <a class="cert-link" href="https://github.com/Nyawale/cv/blob/main/Recommendation%20Letter%20Raleigh.pdf" target="_blank">↗ View Letter</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ PUBLICATIONS ══════════ -->
-<section id="publications" class="dark-sec">
-  <div class="sec-wrap">
-    <div class="sh">
-      <p class="ey gold">Research &amp; Writing</p>
-      <h2 class="h2 light">Publications &amp; <em>Writings</em></h2>
-    </div>
-
-    <!-- Ongoing Research -->
-    <div class="research-card">
-      <div class="res-label">🔬 Ongoing Research Project</div>
-      <div class="res-title">Beyond System Security: Addressing the Behavioral and Identity Gap in Mobile Money Fraud Prevention in Tanzania</div>
-      <div class="res-desc">This project examines the growing challenge of mobile money fraud in Tanzania by focusing on behavioural and identity-related gaps that existing security systems fail to address. Using FinScope Tanzania 2023 data, the research investigates how socio-demographic factors, behavioural patterns, digital usage methods and reliance on third-party SIM cards influence vulnerability to mobile money fraud. Through descriptive analysis and logistic regression, the study aims to generate evidence for a user-centered fraud prevention framework.</div>
-      <div class="res-links">
-        <a class="res-btn" href="https://osf.io/pm4eg/overview" target="_blank">↗ OSF Project Overview</a>
-        <a class="res-btn" href="https://osf.io/pm4eg/files/gceb5" target="_blank">↗ OSF Data File</a>
-      </div>
-    </div>
-
-    <div class="pub-tabs">
-      <button class="ptab active" onclick="showTab('peer',this)">Peer-Reviewed &amp; Academic</button>
-      <button class="ptab" onclick="showTab('oped',this)">Op-Eds &amp; Commentary</button>
-    </div>
-
-    <div id="tab-peer" class="pub-panel active">
-      <div class="peer-list">
-        <div class="peer-card">
-          <span class="py">2025</span>
-          <div class="ptitle">Denominational Inflation: Limited Currency Divisibility in Cash Payment Systems – Tanzania as a Case Study</div>
-          <div class="pauth">Nyonzo, F. S.</div>
-          <div class="pcite"><em>Advanced Research in Economics and Business Strategy Journal</em>, 6(1), 200–214.</div>
-          <a class="pb" href="https://doi.org/10.52919/arebus.v6i1.82" target="_blank">↗ DOI</a>
-          <a class="pb gold" href="https://osf.io/6wqxf/files/k3v6c" target="_blank">↗ STATA Data (OSF)</a>
-        </div>
-        <div class="peer-card">
-          <span class="py">2024</span>
-          <div class="ptitle">Assessing Tanzanians' Response to the Implementation of a Mobile Money Transaction Levy</div>
-          <div class="pauth">Nyonzo, F.</div>
-          <div class="pcite"><em>African Multidisciplinary Tax Journal</em>, 4(1), 167–186.</div>
-          <a class="pb" href="https://doi.org/10.47348/AMTJ/V4/I1A9" target="_blank">↗ DOI</a>
-        </div>
-        <div class="peer-card">
-          <span class="py">2022</span>
-          <div class="ptitle">Tanzania's Solidarity Tax</div>
-          <div class="pauth">Nyonzo, Francis.</div>
-          <div class="pcite"><em>Review of African Political Economy</em>, 49(174), 643–651.</div>
-          <a class="pb" href="https://doi.org/10.1080/03056244.2022.2138308" target="_blank">↗ DOI</a>
-          <a class="pb gold" href="https://ideas.repec.org/a/taf/revape/v49y2022i174p643-651.html" target="_blank">↗ IDEAS/RePeC</a>
-        </div>
-        <div class="peer-card dashed">
-          <span class="py">2024 · Preprint</span>
-          <div class="ptitle">Internet Blockings and Government Revenue: Case Study Tanzania</div>
-          <div class="pauth">Francis Nyonzo</div>
-          <a class="pb gold" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4695755" target="_blank">↗ SSRN Preprint</a>
-        </div>
-        <div class="peer-card terra">
-          <span class="py">Book · 2018</span>
-          <div class="ptitle">Mambo 100 ya Kuzingatiwa na Mwanafunzi wa Kiafrika Karne ya 21</div>
-          <div class="pauth">Francis Nyonzo &amp; Justine Kakoko</div>
-          <div class="pcite">DL Publishers, Arusha, Tanzania. ISBN 978-9976-5274-0-7.</div>
-        </div>
-      </div>
-      <h3 style="font-size:17px;font-family:'Cormorant Garamond',serif;color:#fff;margin:24px 0 12px;font-weight:700">STATA Research Codes &amp; Data</h3>
-      <div class="stata-grid">
-        <div class="stata-item"><div class="si-label">2025 · OSF</div><div class="si-title">Exploring Effective Nudges for Tax Compliance in the Informal Sector in Tanzania</div><a class="si-link" href="https://osf.io/4wxj2/files/fx4ns" target="_blank">↗ osf.io/4wxj2</a></div>
-        <div class="stata-item"><div class="si-label">2025 · OSF</div><div class="si-title">Denominational Inflation — Codes and Data</div><a class="si-link" href="https://osf.io/6wqxf/files/k3v6c" target="_blank">↗ osf.io/6wqxf</a></div>
-      </div>
-      <div class="scholar-cta">
-        <p>Full citation list and impact metrics available on Google Scholar and ORCID.</p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <a href="https://scholar.google.com/citations?user=H3h_rfkAAAAJ&hl=en&oi=ao" target="_blank">Google Scholar →</a>
-          <a href="https://orcid.org/0000-0002-5434-0401" target="_blank" style="background:rgba(166,206,57,.85);color:#1a3300">ORCID →</a>
-        </div>
-      </div>
-    </div>
-
-    <div id="tab-oped" class="pub-panel">
-      <div class="oped-grid">
-        <div class="oped-card"><div class="oy">2026</div><div class="opub">The Chanzo</div><div class="otitle">1.6GB a Month: The Barrier to Tanzania's Digital Transformation</div><a class="olink" href="https://thechanzo.com/2026/05/15/1-6gb-a-month-the-barrier-to-tanzanias-digital-transformation" target="_blank">↗ Read</a></div>
-        <div class="oped-card"><div class="oy">2026</div><div class="opub">The Chanzo</div><div class="otitle">A Youth Bank in Name Only Won't Empower Tanzania's Young</div><a class="olink" href="https://thechanzo.com/2026/05/07/a-youth-bank-in-name-only-wont-empower-tanzanias-young" target="_blank">↗ Read</a></div>
-        <div class="oped-card"><div class="oy">2026</div><div class="opub">The Chanzo</div><div class="otitle">Mobile Money Could Be Africa's Most Powerful Tax Collector — If Governments Let It</div><a class="olink" href="https://thechanzo.com" target="_blank">↗ The Chanzo</a></div>
-        <div class="oped-card"><div class="oy">2026</div><div class="opub">Liberty Sparks</div><div class="otitle">Beyond Tax Enforcement: A Mobile Money Strategy for Formalising Tanzania's Informal Economy</div><a class="olink" href="https://libertysparks.org" target="_blank">↗ Liberty Sparks</a></div>
-        <div class="oped-card"><div class="oy">2026</div><div class="opub">The Chanzo</div><div class="otitle">Preserving Democracy in Africa: Dispelling the Myth of 'Localising'</div><a class="olink" href="https://thechanzo.com/2026/02/18/preserving-democracy-in-africa-dispelling-the-myth-of-localising" target="_blank">↗ Read</a></div>
-        <div class="oped-card"><div class="oy">2026</div><div class="opub">The Chanzo</div><div class="otitle">When Desperation Turns Deadly: Could Tanzania's Magical Violence Really Be About Economic Pain?</div><a class="olink" href="https://thechanzo.com" target="_blank">↗ The Chanzo</a></div>
-        <div class="oped-card"><div class="oy">2025</div><div class="opub">The Chanzo</div><div class="otitle">The Hidden Cost of Cash: How Small Change Shortages Inflate Prices in Tanzania</div><a class="olink" href="https://thechanzo.com/2025/07/04/the-hidden-cost-of-cash-how-small-change-shortages-inflate-prices-in-tanzania" target="_blank">↗ Read</a></div>
-        <div class="oped-card"><div class="oy">2024</div><div class="opub">The Chanzo</div><div class="otitle">Tanzania's Foreign Media Ownership Restrictions Impact Citizens' Freedom of Speech</div><a class="olink" href="https://thechanzo.com/2024/07/02/tanzanias-foreign-media-ownership-restrictions-impact-citizens-freedom-of-speech/" target="_blank">↗ Read</a></div>
-        <div class="oped-card"><div class="oy">2024</div><div class="opub">The Chanzo</div><div class="otitle">Uchawa Vs. Professional Networking: Understanding Key Differences</div><a class="olink" href="https://thechanzo.com/2024/08/20/uchawa-vs-professional-networking-understanding-key-differences/" target="_blank">↗ Read</a></div>
-        <div class="oped-card"><div class="oy">2024</div><div class="opub">Liberty Sparks</div><div class="otitle">Workers' Welfare: Failure of Courts or Trade Unions?</div><a class="olink" href="https://libertysparks.org/workers-welfare-failure-of-courts-or-trade-unions/" target="_blank">↗ Read</a></div>
-        <div class="oped-card"><div class="oy">2024</div><div class="opub">Liberty Sparks</div><div class="otitle">Kenya, Tanzania Cat and Mouse Games Hurting Cross-Border Trade and Prosperity</div><a class="olink" href="https://libertysparks.org" target="_blank">↗ Liberty Sparks</a></div>
-        <div class="oped-card"><div class="oy">2024</div><div class="opub">The Chanzo</div><div class="otitle">No Tanzanian Child Should Be Dismissed From School for Indiscipline</div><a class="olink" href="https://thechanzo.com" target="_blank">↗ The Chanzo</a></div>
-        <div class="oped-card"><div class="oy">2023</div><div class="opub">The Chanzo</div><div class="otitle">Tanzania's "Vagrancy Law" Crusade on Poor Citizens is Wrong</div><a class="olink" href="https://thechanzo.com/2023/12/11/tanzanias-vagrancy-law-crusade-on-poor-citizens-is-wrong/" target="_blank">↗ Read</a></div>
-        <div class="oped-card"><div class="oy">2023</div><div class="opub">The Chanzo</div><div class="otitle">Tanzania's Media Services Act: A Manifestation of the Man With the Hammer Syndrome?</div><a class="olink" href="https://thechanzo.com" target="_blank">↗ The Chanzo</a></div>
-        <div class="oped-card"><div class="oy">2023</div><div class="opub">The Chanzo</div><div class="otitle">JamiiForums' Stories of Change: Double Impact of Citizen Journalism</div><a class="olink" href="https://thechanzo.com/2023/04/28/jamiiforums-stories-of-change-double-impact-of-citizen-journalism/" target="_blank">↗ Read</a></div>
-        <div class="oped-card"><div class="oy">2023</div><div class="opub">The Chanzo</div><div class="otitle">Solidarity Tax: How Long Will Tanzanians Suffer?</div><a class="olink" href="https://thechanzo.com/2023/01/09/solidarity-tax-how-long-will-tanzanians-suffer/" target="_blank">↗ Read</a></div>
-        <div class="oped-card"><div class="oy">2023</div><div class="opub">The Chanzo</div><div class="otitle">Here's Why Costs of Data In Tanzania Are High</div><a class="olink" href="https://thechanzo.com/2023/01/20/heres-why-costs-of-data-in-tanzania-are-high/" target="_blank">↗ Read</a></div>
-        <div class="oped-card"><div class="oy">2023</div><div class="opub">Fesmedia Africa</div><div class="otitle">Data Bundle Price Hikes Limit Access to Information in Tanzania, Too</div><a class="olink" href="https://fesmedia.org" target="_blank">↗ Fesmedia</a></div>
-        <div class="oped-card"><div class="oy">2023</div><div class="opub">ACME</div><div class="otitle">Enforcing Regional Judiciary Decisions: The Case of Tanzania's Media Services Act</div><a class="olink" href="https://acme-ug.org/2023/05/15/enforcing-regional-judiciary-decisions-the-case-of-tanzanias-media-services-act/" target="_blank">↗ Read</a></div>
-        <div class="oped-card"><div class="oy">2023</div><div class="opub">Liberty Sparks</div><div class="otitle">Will the EAC Competition Authority Enhance Competition and Protect Consumers?</div><a class="olink" href="https://libertysparks.org/will-the-east-african-community-competition-authority-enhance-competition-and-protect-consumers/" target="_blank">↗ Read</a></div>
-        <div class="oped-card"><div class="oy">2023</div><div class="opub">UN OHCHR</div><div class="otitle">The Challenges of Free Education in Tanzania</div><a class="olink" href="https://www.ohchr.org" target="_blank">↗ OHCHR</a></div>
-        <div class="oped-card"><div class="oy">2023</div><div class="opub">Minority Africa</div><div class="otitle">"It Is Like Slavery": Tanzanian Bar Waitresses Speak Up on Sexual Abuse</div><a class="olink" href="https://minorityafrica.org/author/fnzone/" target="_blank">↗ Minority Africa</a></div>
-        <div class="oped-card"><div class="oy">2022</div><div class="opub">African Assoc. of Entrepreneurs</div><div class="otitle">Legal and Financial Environment for Micro-Entrepreneurs in Tanzania</div><a class="olink" href="https://allafripreneurs.org/tanzania/legal-and-financial-environment-for-micro-enterprises-in-tanzania/" target="_blank">↗ Read</a></div>
-        <div class="oped-card"><div class="oy">2022</div><div class="opub">AuthorAid</div><div class="otitle">Limitations of Online Survey Tools for Developing Countries</div><a class="olink" href="https://www.authoraid.info" target="_blank">↗ AuthorAid</a></div>
-        <div class="oped-card"><div class="oy">2022</div><div class="opub">AuthorAid</div><div class="otitle">Since 'Data is the New Oil', Researchers Must Become Skilled in Cyber Security</div><a class="olink" href="https://www.authoraid.info" target="_blank">↗ AuthorAid</a></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ CONFERENCES ══════════ -->
-<section id="conferences">
-  <div class="sec">
-    <div class="sh">
-      <p class="ey teal">Speaking &amp; Presentations</p>
-      <h2 class="h2">Conferences &amp; <em>Seminars</em></h2>
-    </div>
-    <div class="conf-list">
-      <div class="conf-card">
-        <div>
-          <div class="conf-meta">June 2025 · University of Toronto Scarborough, Canada</div>
-          <div class="conf-title">The Digital Microfinance Model: Modern Way of Alleviating Poverty</div>
-          <div class="conf-event">Canadian Association of African Studies (CAAS) Annual Conference</div>
-        </div>
-        <a class="conf-link" href="https://cdn.prod.website-files.com/66f22a27ed56b73a8fd0277c/683d8175b8ba2850aafc7bdd_CAAS%20Conference%202025%20Programme%20BOOK_Final2.pdf" target="_blank">↗ Programme</a>
-      </div>
-      <div class="conf-card gc">
-        <div>
-          <div class="conf-meta">March 2025 · Bloomington, Indiana, USA</div>
-          <div class="conf-title">Exploring Effective Nudges for Tax Compliance in the Informal Sector in Tanzania</div>
-          <div class="conf-event">Indiana University International Conference on Africa — 11th Annual Conference</div>
-        </div>
-        <div></div>
-      </div>
-      <div class="conf-card">
-        <div>
-          <div class="conf-meta">December 2024 · Chicago, Illinois, USA</div>
-          <div class="conf-title">Challenges of Investigative Journalism in Tanzania</div>
-          <div class="conf-event">African Studies Association — 67th Annual Meeting</div>
-        </div>
-        <div></div>
-      </div>
-      <div class="conf-card">
-        <div>
-          <div class="conf-meta">August–September 2023 · Dar es Salaam, Tanzania</div>
-          <div class="conf-title">Assessing Tanzanians' Practical Reaction to Mobile Money Transaction Levy Implementation</div>
-          <div class="conf-event">ATRN 8th Annual Congress on Contemporary Taxation Issues in Africa</div>
-        </div>
-        <div></div>
-      </div>
-      <div class="conf-card">
-        <div>
-          <div class="conf-meta">September 2023 · Gothenburg, Sweden — Paper accepted; unable to attend</div>
-          <div class="conf-title">Tanzania's Investigative Journalists: A Look at the Difficulties of Exposing the Truth</div>
-          <div class="conf-event">2023 Global Investigative Journalism Conference (GIJC)</div>
-        </div>
-        <a class="conf-link" href="https://gijc2023.org/speaker/francisnyonzo/" target="_blank">↗ Speaker Profile</a>
-      </div>
-    </div>
-    <div class="aea-card">
-      <div class="aea-label">Special Mention — American Economic Association</div>
-      <div class="aea-title">Invited to Present at ASSA 2025 Annual Meeting</div>
-      <div class="aea-desc">Invited to present two research papers at the 2025 Allied Social Science Associations (ASSA) Annual Meeting — a flagship gathering of economists and social scientists.</div>
-      <div class="aea-links">
-        <a class="conf-link" href="https://www.aeaweb.org/conference/2025/program/1951?q=eNqrVipOLS7OzM8LqSxIVbKqhnGVrJQMlWp1lJITS1LT84sqgXwlHaXE4uL8ZAizJLUoF8JKSYTKlmTmpkJYZZmp5SDDigoKgAKmBiCTChLTQbJmSrVcMFnqXCJl" target="_blank">↗ Making Economic Sense — Discrimination, Inequality &amp; Identity</a>
-        <a class="conf-link" href="https://www.aeaweb.org/conference/2025/program/2023?q=eNqrVipOLS7OzM8LqSxIVbKqhnGVrJQMlWp1lJITS1LT84sqgXwlHaXE4uL8ZAizJLUoF8JKSYTKlmTmpkJYZZmp5SDDigoKgAKmBiCTChLTQbKGQA5cMHwsXCKQ" target="_blank">↗ Hidden Strikes — Petty Corruption &amp; Absenteeism in Tanzania</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ GALLERY ══════════ -->
-<section id="gallery" class="alt-sec">
-  <div class="sec-wrap">
-    <div class="sh">
-      <p class="ey gold">Moments &amp; Milestones</p>
-      <h2 class="h2 light">Photo <em>Gallery</em></h2>
-    </div>
-
-    <!-- MSU Humphrey Group Photo — external URL always works -->
-    <div style="width:100%;border-radius:10px;overflow:hidden;margin-bottom:10px;position:relative;box-shadow:0 8px 32px rgba(0,0,0,.4)">
-      <img id="msu-group"
-        src="https://edge.sitecorecloud.io/michigansta4044-msutodaye50e-prode5b2-fb0c/media/project/msu/msutoday/images/2025/2025-04-15-photo-gallery/2025-04-15-humphrey-fellowship-dlt.jpg?h=1686&iar=0&w=3000"
-        alt="MSU Humphrey Fellows 2024-25"
-        style="width:100%;height:280px;object-fit:cover;object-position:center 25%;display:block;cursor:pointer"
-        onclick="openLb(this.src, this.alt, 'Hubert H. Humphrey Fellows at Michigan State University, 2024–25. Francis Nyonzo with Dr. Anjam Chaudhary, Dr. Brian Boggs and Kyle Hess after completing the fellowship programme.')"
-        onerror="this.parentElement.style.display='none'">
-      <div style="position:absolute;bottom:0;left:0;right:0;padding:16px 20px;background:linear-gradient(transparent,rgba(11,22,35,.92));color:#fff">
-        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(247,168,0,.85);font-weight:700;margin-bottom:4px">📸 Featured Photo</div>
-        <div style="font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.85)">Hubert H. Humphrey Fellows at Michigan State University, 2024–25. Francis Nyonzo with Dr. Anjam Chaudhary, Dr. Brian Boggs and Kyle Hess after completing the fellowship programme.</div>
-      </div>
-    </div>
-
-    <!-- Gallery grid — all 18 photos with fallback cards -->
-    <div id="gal-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px"></div>
-
-    <p style="text-align:center;margin-top:18px;font-size:11.5px;color:rgba(255,255,255,.3)">
-      Photos sourced from <a href="https://github.com/Nyawale/cv/" target="_blank" style="color:var(--teal2)">github.com/Nyawale/cv</a> ·
-      <span style="color:rgba(247,168,0,.5)"></span>
-    </p>
-  </div>
-</section>
-
-<!-- Lightbox overlay -->
-<div id="lightbox" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(5,10,18,.95);cursor:pointer;flex-direction:column;align-items:center;justify-content:center;padding:20px" onclick="closeLb()">
-  <button onclick="closeLb();event.stopPropagation()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:rgba(255,255,255,.7);font-size:28px;cursor:pointer;line-height:1">✕</button>
-  <button id="lb-prev" onclick="lbNav(-1);event.stopPropagation()" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:22px;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center">‹</button>
-  <button id="lb-next" onclick="lbNav(1);event.stopPropagation()" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:22px;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center">›</button>
-  <img id="lb-img" src="" alt="" style="max-width:88vw;max-height:76vh;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.6);object-fit:contain">
-  <div id="lb-counter" style="margin-top:10px;font-size:11px;color:rgba(255,255,255,.35);letter-spacing:2px"></div>
-  <div id="lb-cap" style="margin-top:10px;max-width:640px;text-align:center;font-size:13px;color:rgba(255,255,255,.72);line-height:1.6;font-style:italic"></div>
-</div>
-
+<!-- Mobile Navigation Toggle Logic Script -->
 <script>
-/* ── Gallery data — all 18 photos ── */
-const PHOTOS = [
-  {
-    file: "LedershipForumsWashington.jpg",
-    caption: "Francis Nyonzo at the Global Leadership Forum, Washington DC, 2024"
-  },
-  {
-    file: "atMSU.jpg",
-    caption: "Francis Nyonzo at the library of Michigan State University"
-  },
-  {
-    file: "PresentingInIndiana.jpg",
-    caption: "Francis Nyonzo presenting at Indiana University Bloomington, March 2025"
-  },
-  {
-    file: "MSUGraduationday.jpg",
-    caption: "Francis Nyonzo after receiving the MSU certificate for completing the Hubert H. Humphrey programme. Others in the picture: Dr. Anjam Chaudhary, Dr. Brian Boggs and Kyle Hess"
-  },
-  {
-    file: "ExplainingthingstoHEMwinyi.jpg",
-    caption: "Francis Nyonzo explaining something to H.E. Hussein Mwinyi, the President of Zanzibar"
-  },
-  {
-    file: "Black History Month Quiz, March 15, 2023.jpg",
-    caption: "Francis Nyonzo with H.E. Michael Battle, then US Ambassador to Tanzania, on March 15, 2023 — after winning the Black History Month Quiz"
-  },
-  {
-    file: "WorldPressFreedom2024dodoma.jpg",
-    caption: "Francis Nyonzo at World Press Freedom Day 2024 in Dodoma"
-  },
-  {
-    file: "PresfeedZanzibar2023.jpg",
-    caption: "Francis Nyonzo talking on Press Freedom Day 2023 in Zanzibar"
-  },
-  {
-    file: "PressFreedom2023.jpg",
-    caption: "Press Freedom Day 2023, Zanzibar"
-  },
-  {
-    file: "TrainingWomenEntrpreneursMagomen.jpg",
-    caption: "Francis Nyonzo giving financial awareness training to women entrepreneurs in Magomeni, Dar es Salaam"
-  },
-  {
-    file: "TraingOnDigitalViolence.JPG",
-    caption: "Francis Nyonzo delivering training on tech-facilitated violence to journalists at a WilDAF event"
-  },
-  {
-    file: "MastersGraduationZanzibar.jpg",
-    caption: "Francis Nyonzo with Stephen Nyonzo in Zanzibar after being conferred the MSc in Economics, November 25, 2021"
-  },
-  {
-    file: "Graduationday, BA.jpg",
-    caption: "Francis Nyonzo, Naaman Kohoye and Raphael Mashafi in Dodoma on graduation day, November 25, 2016"
-  },
-  {
-    file: "ATalkwith LansingCommunityCollegeStudents.JPG",
-    caption: "Francis Nyonzo talking with Lansing Community College students"
-  },
-  {
-    file: "ExplainigLansingComm.JPG",
-    caption: "Francis Nyonzo presenting about his journey as a Hubert H. Humphrey Fellow at Michigan State University"
-  },
-  {
-    file: "DoingLeadershipTaskatMSU.JPG",
-    caption: "Francis Nyonzo doing a leadership task at the leadership training at MSU"
-  },
-  {
-    file: "Discussing with the team.jpg",
-    caption: "Francis Nyonzo in a normal meeting with the Content Management team when he was heading the department at JamiiAfrica"
-  },
-  {
-    file: "ExplainigLansingComm.JPG",
-    caption: "Francis Nyonzo explaining his journey as a Hubert H. Humphrey Fellow at Lansing Community"
-  }
-];
+  const mobileMenuBtn = document.getElementById('mobile-menu');
+  const navLinksContainer = document.getElementById('nav-links');
+  const individualLinks = document.querySelectorAll('.nav-links a');
 
-/* Deduplicate by file name */
-const seen = new Set();
-const GALLERY = PHOTOS.filter(p => { if(seen.has(p.file)) return false; seen.add(p.file); return true; });
-
-const BASE = "https://raw.githubusercontent.com/Nyawale/cv/main/";
-let lbIndex = 0;
-
-function enc(s){ return encodeURIComponent(s); }
-
-function buildGallery(){
-  const grid = document.getElementById('gal-grid');
-  GALLERY.forEach((photo, i) => {
-    const url = BASE + enc(photo.file);
-    const div = document.createElement('div');
-    div.style.cssText = 'position:relative;overflow:hidden;border-radius:6px;aspect-ratio:4/3;background:var(--navy3);cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.3)';
-    div.innerHTML = `
-      <img data-src="${url}" alt="${photo.caption}"
-        style="width:100%;height:100%;object-fit:cover;transition:transform .4s,opacity .4s;display:block"
-        onload="this.style.opacity=1;this.parentElement.querySelector('.gal-fb').style.display='none'"
-        onerror="this.style.display='none';this.parentElement.querySelector('.gal-fb').style.display='flex'"
-      >
-      <div class="gal-fb" style="display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;padding:14px;text-align:center;background:linear-gradient(135deg,rgba(13,107,117,.35),rgba(15,29,45,.8))">
-        <div style="font-size:28px;margin-bottom:8px">🖼️</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.55);line-height:1.5">${photo.caption}</div>
-      </div>
-      <div style="position:absolute;bottom:0;left:0;right:0;padding:8px 10px;background:linear-gradient(transparent,rgba(11,22,35,.92));color:rgba(255,255,255,.85);font-size:10px;line-height:1.45;transform:translateY(100%);transition:transform .28s">
-        ${photo.caption}
-      </div>
-    `;
-    /* hover show caption */
-    div.addEventListener('mouseenter', function(){ this.querySelector('div:last-child').style.transform = 'translateY(0)'; });
-    div.addEventListener('mouseleave', function(){ this.querySelector('div:last-child').style.transform = 'translateY(100%)'; });
-    /* click open lightbox */
-    div.addEventListener('click', function(){
-      const img = this.querySelector('img');
-      if(img && img.style.display !== 'none'){
-        openLb(img.src, img.alt, photo.caption, i);
-      } else {
-        /* photo not loaded — show caption modal */
-        openLb('', img.alt, photo.caption, i);
-      }
-    });
-    grid.appendChild(div);
-  });
-
-  /* Lazy load with IntersectionObserver */
-  const obs = new IntersectionObserver((entries, ob) => {
-    entries.forEach(e => {
-      if(e.isIntersecting){
-        const img = e.target.querySelector('img[data-src]');
-        if(img){ img.src = img.dataset.src; img.removeAttribute('data-src'); }
-        ob.unobserve(e.target);
-      }
-    });
-  }, {rootMargin:'200px'});
-  grid.querySelectorAll('div[style*="aspect-ratio"]').forEach(el => obs.observe(el));
-}
-
-function openLb(src, alt, caption, idx){
-  lbIndex = (idx !== undefined) ? idx : 0;
-  const lb = document.getElementById('lightbox');
-  const img = document.getElementById('lb-img');
-  const cap = document.getElementById('lb-cap');
-  const ctr = document.getElementById('lb-counter');
-  lb.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-  if(src){
-    img.src = src; img.alt = alt; img.style.display = 'block';
-  } else {
-    img.style.display = 'none';
-  }
-  cap.textContent = caption;
-  ctr.textContent = (idx !== undefined) ? `${lbIndex + 1} / ${GALLERY.length}` : '';
-}
-
-function closeLb(){
-  document.getElementById('lightbox').style.display = 'none';
-  document.body.style.overflow = '';
-}
-
-function lbNav(dir){
-  lbIndex = (lbIndex + dir + GALLERY.length) % GALLERY.length;
-  const photo = GALLERY[lbIndex];
-  const url = BASE + enc(photo.file);
-  const img = document.getElementById('lb-img');
-  img.src = url; img.alt = photo.caption; img.style.display = 'block';
-  document.getElementById('lb-cap').textContent = photo.caption;
-  document.getElementById('lb-counter').textContent = `${lbIndex + 1} / ${GALLERY.length}`;
-}
-
-/* Keyboard nav */
-document.addEventListener('keydown', function(e){
-  if(document.getElementById('lightbox').style.display === 'flex'){
-    if(e.key === 'ArrowRight') lbNav(1);
-    if(e.key === 'ArrowLeft')  lbNav(-1);
-    if(e.key === 'Escape')     closeLb();
-  }
-});
-
-buildGallery();
-</script>
-
-<!-- ══════════ NETWORKS ══════════ -->
-<section id="networks">
-  <div class="sec">
-    <div class="sh">
-      <p class="ey teal">Affiliations</p>
-      <h2 class="h2">Networks &amp; <em>Memberships</em></h2>
-    </div>
-    <div class="nets-grid">
-      <div class="net-card">
-        <div class="nicon">📑</div>
-        <div class="ntitle">African Tax Research Network (ATRN)</div>
-        <div class="ndesc">Pretoria, South Africa · Since July 2023. Scientific member and peer reviewer supporting evidence-based tax policy across Africa.</div>
-      </div>
-      <div class="net-card">
-        <div class="nicon">🎓</div>
-        <div class="ntitle">African Studies Association</div>
-        <div class="ndesc">New Jersey, USA · Since November 2024. Registered as an International Emerging Scholar.</div>
-        <a class="nlink" href="https://africanstudies.org/" target="_blank">↗ africanstudies.org</a>
-      </div>
-      <div class="net-card">
-        <div class="nicon">✍️</div>
-        <div class="ntitle">African Liberty Writing Fellowship</div>
-        <div class="ndesc">2023–24. Writing Fellow producing policy commentary advancing individual freedom and democracy. A Students For Liberty project.</div>
-        <a class="nlink" href="https://www.africanliberty.org/fellows/" target="_blank">↗ africanliberty.org</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ FOOTER ══════════ -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-name">Francis <span>Nyonzo</span></div>
-    <div class="footer-links">
-      <a href="https://www.linkedin.com/in/francis-nyonzo-77b3b9242/" target="_blank">LinkedIn</a>
-      <a href="https://x.com/nyawale" target="_blank">X / Twitter</a>
-      <a href="https://www.facebook.com/balozi.moro" target="_blank">Facebook</a>
-      <a href="https://www.instagram.com/nyawale_nyonzo/" target="_blank">Instagram</a>
-      <a href="https://scholar.google.com/citations?user=H3h_rfkAAAAJ&hl=en&oi=ao" target="_blank">Google Scholar</a>
-      <a href="https://orcid.org/0000-0002-5434-0401" target="_blank">ORCID</a>
-      <a href="https://github.com/Nyawale/cv/" target="_blank">GitHub</a>
-      <a href="mailto:francisnyonzo@gmail.com">Email</a>
-    </div>
-    <div class="footer-copy">Dar es Salaam, Tanzania · (+255) 718 651 585 · francisnyonzo@gmail.com</div>
-  </div>
-</footer>
-
-<script>
-/* Tab switching */
-function showTab(id, btn) {
-  document.querySelectorAll('.pub-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.ptab').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + id).classList.add('active');
-  btn.classList.add('active');
-}
-
-/* Nav shadow on scroll — nav stays fixed always */
-window.addEventListener('scroll', function() {
-  const nav = document.getElementById('main-nav');
-  nav.classList.toggle('scrolled', window.scrollY > 10);
-}, { passive: true });
-
-/* Active nav link highlight */
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-links a');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      navLinks.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
-      });
-    }
-  });
-}, { rootMargin: '-40% 0px -55% 0px' });
-sections.forEach(s => observer.observe(s));
-</script>
+  // Open & Close Menu via Hamburger Button
+  mobileMenuBtn.addEventListener('click', () => {
+    mobileMenuBtn.classList.toggle('active');
+    navLinksContainer.classList.toggle('active');
+  </script>
 </body>
 </html>
