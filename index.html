@@ -5,8 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Francis Nyonzo — Economist · Researcher · | Tanzania</title>
-<meta name="description" content="Francis Stephen Nyonzo is a Tanzanian economist, researcher and digital governance specialist. Fulbright HHH Fellow 2024–25, Rotary Peace Fellow 2026–27. Expert in mobile money, taxation and East African policy.">
+<title>Francis Nyonzo — Economist · Researcher · Journalist | Tanzania</title>
+<meta name="description" content="Francis Stephen Nyonzo is a Tanzanian economist, researcher, journalist and digital governance specialist. Fulbright HHH Fellow 2024–25, Rotary Peace Fellow 2026–27. Expert in mobile money, taxation and East African policy.">
 <meta name="keywords" content="Francis Nyonzo, Tanzania economist, Tanzanian researcher, digital democracy, mobile money Tanzania, Fulbright Fellow Tanzania, Rotary Peace Fellow, East Africa policy, JamiiAfrica, Liberty Sparks">
 <meta name="author" content="Francis Stephen Nyonzo">
 <meta name="robots" content="index, follow">
@@ -511,6 +511,7 @@ section+section{border-top:1px solid var(--border)}
 }
 .gal-item img{
   width:100%;height:auto;display:block;
+  position:static;
   transition:transform .4s ease,opacity .4s ease;
   opacity:0;
 }
@@ -522,6 +523,7 @@ section+section{border-top:1px solid var(--border)}
   background:linear-gradient(transparent,rgba(11,22,35,.94));
   color:rgba(255,255,255,.88);font-size:10.5px;line-height:1.45;
   transform:translateY(100%);transition:transform .28s ease;
+  pointer-events:none;
 }
 .gal-item:hover .gal-cap,
 .gal-item:focus .gal-cap{transform:translateY(0)}
@@ -1238,7 +1240,7 @@ footer{background:var(--navy);padding:40px 20px 28px;border-top:1px solid rgba(2
     <div class="gal-grid" id="gal-grid" role="list" aria-label="Photo gallery"></div>
 
     <p style="text-align:center;margin-top:16px;font-size:11px;color:rgba(255,255,255,.28)">
-       <strong style="color:rgba(247,168,0,.6)"></strong> .
+      ⚠ To display all photos, make the GitHub repository <strong style="color:rgba(247,168,0,.6)">github.com/Nyawale/cv</strong> public, or upload photos to a public host.
     </p>
   </div>
 </section>
@@ -1348,170 +1350,334 @@ function showTab(id, btn){
   btn.classList.add('active');btn.setAttribute('aria-selected','true');
 }
 
-/* ════════════════════════════════════════
-   GALLERY DATA — all 17 unique photos
-════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════
+   GALLERY — Canvas-based compression for fast loading
+   
+   How it works:
+   1. Fetch image (raw GitHub, CORS allowed)
+   2. Draw onto a Canvas at thumbnail size (600px wide)
+   3. Export as compressed JPEG blob (quality 0.78)
+   4. Cache in sessionStorage — revisit = instant
+   5. Lightbox: medium size (1200px) not the 7 MB original
+   6. Concurrency: max 2 simultaneous fetches
+   7. IntersectionObserver: only process images near viewport
+═══════════════════════════════════════════════════════ */
+
 const PHOTOS = [
-  {file:"LedershipForumsWashington.jpg",      cat:"international", caption:"Francis Nyonzo at the Global Leadership Forum, Washington DC, 2024"},
-  {file:"atMSU.jpg",                           cat:"academic",      caption:"Francis Nyonzo at the library of Michigan State University"},
-  {file:"PresentingInIndiana.jpg",             cat:"academic",      caption:"Francis Nyonzo presenting at Indiana University Bloomington, March 2025"},
-  {file:"MSUGraduationday.jpg",                cat:"academic",      caption:"Francis Nyonzo after receiving the MSU Hubert H. Humphrey certificate. With Dr. Anjam Chaudhary, Dr. Brian Boggs and Kyle Hess"},
-  {file:"ExplainingthingstoHEMwinyi.jpg",      cat:"advocacy",      caption:"Francis Nyonzo explaining to H.E. Hussein Mwinyi, the President of Zanzibar"},
+  {file:"LedershipForumsWashington.jpg",       cat:"international", caption:"Francis Nyonzo at the Global Leadership Forum, Washington DC, 2024"},
+  {file:"atMSU.jpg",                            cat:"academic",      caption:"Francis Nyonzo at the library of Michigan State University"},
+  {file:"PresentingInIndiana.jpg",              cat:"academic",      caption:"Francis Nyonzo presenting at Indiana University Bloomington, March 2025"},
+  {file:"MSUGraduationday.jpg",                 cat:"academic",      caption:"Francis Nyonzo after receiving the MSU Hubert H. Humphrey certificate. With Dr. Anjam Chaudhary, Dr. Brian Boggs and Kyle Hess"},
+  {file:"ExplainingthingstoHEMwinyi.jpg",       cat:"advocacy",      caption:"Francis Nyonzo explaining to H.E. Hussein Mwinyi, the President of Zanzibar"},
   {file:"Black History Month Quiz, March 15, 2023.jpg", cat:"international", caption:"Francis Nyonzo with H.E. Michael Battle, US Ambassador to Tanzania, after winning the Black History Month Quiz at the US Embassy, March 15, 2023"},
-  {file:"WorldPressFreedom2024dodoma.jpg",     cat:"advocacy",      caption:"Francis Nyonzo at World Press Freedom Day 2024 in Dodoma"},
-  {file:"PresfeedZanzibar2023.jpg",            cat:"advocacy",      caption:"Francis Nyonzo speaking on Press Freedom Day 2023 in Zanzibar"},
-  {file:"PressFreedom2023.jpg",                cat:"advocacy",      caption:"Francis Nyonzo at Press Freedom Day 2023 in Zanzibar"},
-  {file:"TrainingWomenEntrpreneursMagomen.jpg",cat:"community",     caption:"Francis Nyonzo giving financial awareness training to women entrepreneurs in Magomeni, Dar es Salaam"},
-  {file:"TraingOnDigitalViolence.JPG",         cat:"advocacy",      caption:"Francis Nyonzo delivering training on tech-facilitated violence to journalists at a WilDAF event"},
-  {file:"MastersGraduationZanzibar.jpg",       cat:"academic",      caption:"Francis Nyonzo with Stephen Nyonzo in Zanzibar after being conferred the MSc in Economics, November 25, 2021"},
-  {file:"Graduationday, BA.jpg",               cat:"academic",      caption:"Francis Nyonzo, Naaman Kohoye and Raphael Mashafi in Dodoma on BA graduation day, November 25, 2016"},
+  {file:"WorldPressFreedom2024dodoma.jpg",      cat:"advocacy",      caption:"Francis Nyonzo at World Press Freedom Day 2024 in Dodoma"},
+  {file:"PresfeedZanzibar2023.jpg",             cat:"advocacy",      caption:"Francis Nyonzo speaking on Press Freedom Day 2023 in Zanzibar"},
+  {file:"PressFreedom2023.jpg",                 cat:"advocacy",      caption:"Francis Nyonzo at Press Freedom Day 2023 in Zanzibar"},
+  {file:"TrainingWomenEntrpreneursMagomen.jpg", cat:"community",     caption:"Francis Nyonzo giving financial awareness training to women entrepreneurs in Magomeni, Dar es Salaam"},
+  {file:"TraingOnDigitalViolence.JPG",          cat:"advocacy",      caption:"Francis Nyonzo delivering training on tech-facilitated violence to journalists at a WilDAF event"},
+  {file:"MastersGraduationZanzibar.jpg",        cat:"academic",      caption:"Francis Nyonzo with Stephen Nyonzo in Zanzibar after being conferred the MSc in Economics, November 25, 2021"},
+  {file:"Graduationday, BA.jpg",                cat:"academic",      caption:"Francis Nyonzo, Naaman Kohoye and Raphael Mashafi in Dodoma on BA graduation day, November 25, 2016"},
   {file:"ATalkwith LansingCommunityCollegeStudents.JPG", cat:"international", caption:"Francis Nyonzo talking with Lansing Community College students"},
-  {file:"ExplainigLansingComm.JPG",            cat:"international", caption:"Francis Nyonzo presenting about his Hubert H. Humphrey Fellowship journey at Michigan State University"},
-  {file:"DoingLeadershipTaskatMSU.JPG",        cat:"academic",      caption:"Francis Nyonzo doing a leadership task at leadership training at MSU"},
-  {file:"Discussing with the team.jpg",        cat:"community",     caption:"Francis Nyonzo in a team meeting with the Content Management department at JamiiAfrica"}
+  {file:"ExplainigLansingComm.JPG",             cat:"international", caption:"Francis Nyonzo presenting about his Hubert H. Humphrey Fellowship journey at Michigan State University"},
+  {file:"DoingLeadershipTaskatMSU.JPG",         cat:"academic",      caption:"Francis Nyonzo doing a leadership task at leadership training at MSU"},
+  {file:"Discussing with the team.jpg",         cat:"community",     caption:"Francis Nyonzo in a team meeting with the Content Management department at JamiiAfrica"}
 ];
 
-const BASE = "https://raw.githubusercontent.com/Nyawale/cv/main/";
-let curCat = "all";
-let lbIdx  = 0;
-let lbList = [];   // indices of currently visible photos
-let touchStartX = 0;
+const RAW_BASE = "https://raw.githubusercontent.com/Nyawale/cv/main/";
 
-/* ── Build / filter gallery ── */
-function filterPhotos(cat){
-  return cat === 'all' ? PHOTOS.map((_,i)=>i) : PHOTOS.reduce((a,p,i) => { if(p.cat===cat) a.push(i); return a; },[]);
+/* Encode filename for URL (spaces only) */
+function rawUrl(filename) {
+  return RAW_BASE + filename.replace(/ /g, '%20');
 }
 
-function buildGallery(cat){
+/* Cache key for sessionStorage */
+function cacheKey(filename, size) {
+  return 'fn_gallery_' + filename.replace(/[^a-z0-9]/gi,'_') + '_' + size;
+}
+
+/* Canvas-compress: fetch → draw on canvas → export as compressed JPEG blob URL
+   Returns a Promise<string> (blob URL or data URL) */
+function compressImage(filename, targetWidth, quality) {
+  return new Promise((resolve, reject) => {
+    const key = cacheKey(filename, targetWidth);
+    
+    /* 1. Check sessionStorage cache first */
+    try {
+      const cached = sessionStorage.getItem(key);
+      if (cached) { resolve(cached); return; }
+    } catch(e) {}
+
+    /* 2. Fetch full image */
+    const url = rawUrl(filename);
+    const img = new Image();
+    img.crossOrigin = 'anonymous';   /* GitHub sends Access-Control-Allow-Origin: * */
+
+    img.onload = function() {
+      try {
+        /* 3. Draw at thumbnail size on offscreen canvas */
+        const scale  = targetWidth / img.naturalWidth;
+        const height = Math.round(img.naturalHeight * scale);
+        const canvas = document.createElement('canvas');
+        canvas.width  = targetWidth;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, targetWidth, height);
+
+        /* 4. Export as compressed JPEG */
+        canvas.toBlob(blob => {
+          if (!blob) { resolve(url); return; }  /* fallback to original */
+          const blobUrl = URL.createObjectURL(blob);
+          /* 5. Cache in sessionStorage (as data URL — blob URLs don't survive refresh) */
+          try {
+            const reader = new FileReader();
+            reader.onload = () => {
+              try { sessionStorage.setItem(key, reader.result); } catch(e) {}
+              resolve(reader.result);            /* data URL for display */
+            };
+            reader.readAsDataURL(blob);
+          } catch(e) {
+            resolve(blobUrl);
+          }
+        }, 'image/jpeg', quality);
+      } catch(e) {
+        /* Canvas tainted or other error — use original URL */
+        resolve(url);
+      }
+    };
+
+    img.onerror = () => resolve(url);   /* fallback to full-size */
+    img.src = url;
+  });
+}
+
+/* ── Concurrency limiter (max 2 simultaneous canvas operations) ── */
+let activeOps = 0;
+const MAX_OPS = 2;
+const opQueue = [];
+
+function enqueueCompress(filename, size, quality, callback) {
+  opQueue.push({filename, size, quality, callback});
+  drainOps();
+}
+function drainOps() {
+  while (activeOps < MAX_OPS && opQueue.length > 0) {
+    const {filename, size, quality, callback} = opQueue.shift();
+    activeOps++;
+    compressImage(filename, size, quality).then(src => {
+      callback(src);
+      activeOps--;
+      drainOps();
+    });
+  }
+}
+
+/* ── Gallery state ── */
+let curCat = "all";
+let lbIdx  = 0;
+let lbList = [];
+let touchStartX = 0;
+
+function filterPhotos(cat) {
+  return cat === 'all'
+    ? PHOTOS.map((_,i) => i)
+    : PHOTOS.reduce((a,p,i) => { if(p.cat===cat) a.push(i); return a; }, []);
+}
+
+/* ── Build gallery ── */
+function buildGallery(cat) {
   curCat = cat;
   lbList = filterPhotos(cat);
+  opQueue.length = 0;  /* clear pending ops on filter change */
   const grid = document.getElementById('gal-grid');
   grid.innerHTML = '';
 
   lbList.forEach((pi, li) => {
-    const p   = PHOTOS[pi];
-    const url = BASE + encodeURIComponent(p.file);
+    const p = PHOTOS[pi];
+
     const item = document.createElement('div');
     item.className = 'gal-item';
     item.setAttribute('role','listitem');
     item.setAttribute('tabindex','0');
     item.setAttribute('aria-label', p.caption);
-
-    // Skeleton shimmer until image loads
     item.innerHTML = `
-      <div class="gal-skeleton" style="width:100%;aspect-ratio:4/3"></div>
-      <img data-src="${url}"
-           alt="${p.caption}"
-           loading="lazy"
-           decoding="async"
-           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+      <div class="gal-skeleton" style="width:100%;aspect-ratio:4/3;display:block"></div>
+      <img alt="${p.caption}" style="display:none;width:100%;height:auto">
       <div class="gal-cap">${p.caption}</div>`;
 
     const skele = item.querySelector('.gal-skeleton');
     const img   = item.querySelector('img');
 
-    img.addEventListener('load',  () => { img.classList.add('loaded'); skele.remove(); });
-    img.addEventListener('error', () => {
-      item.className = 'gal-fb-card';
-      item.setAttribute('tabindex','0');
-      item.innerHTML = `<div class="fb-emoji">🖼️</div><div class="fb-num">Photo ${pi+1}</div><div class="fb-text">${p.caption}</div>`;
-      item.addEventListener('click', () => openLb(li));
-      item.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') openLb(li); });
-    });
+    /* Called when we have a compressed src to display */
+    function showImg(src) {
+      img.onload = () => {
+        img.style.display = 'block';
+        img.classList.add('loaded');
+        skele.style.display = 'none';
+      };
+      img.onerror = () => {
+        /* Canvas approach failed; show fallback placeholder */
+        item.className = 'gal-fb-card';
+        item.innerHTML = `<div class="fb-emoji">🖼️</div>
+          <div class="fb-num">Photo ${pi+1}</div>
+          <div class="fb-text">${p.caption}</div>`;
+        item.addEventListener('click', () => openLb(li));
+      };
+      img.src = src;
+    }
 
     item.addEventListener('click',   () => openLb(li));
-    item.addEventListener('keydown', e  => { if(e.key==='Enter'||e.key===' ') { e.preventDefault(); openLb(li); } });
+    item.addEventListener('keydown', e => {
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();openLb(li);}
+    });
     grid.appendChild(item);
+
+    /* Store photo index on element for IO callback */
+    item.dataset.pi = pi;
+    item.dataset.li = li;
   });
 
-  /* Lazy-load with IntersectionObserver */
+  /* ── IntersectionObserver: only compress when image is about to enter viewport ── */
   const io = new IntersectionObserver((entries, obs) => {
     entries.forEach(e => {
-      if(e.isIntersecting){
-        const img = e.target.querySelector('img[data-src]');
-        if(img){ img.src = img.dataset.src; img.removeAttribute('data-src'); }
-        obs.unobserve(e.target);
+      if (!e.isIntersecting) return;
+      const el  = e.target;
+      const pi  = parseInt(el.dataset.pi);
+      const li  = parseInt(el.dataset.li);
+      const p   = PHOTOS[pi];
+      const img = el.querySelector('img');
+      if (!img || img.src) { obs.unobserve(el); return; }
+
+      enqueueCompress(p.file, 600, 0.78, src => {
+        /* Check element still in DOM (user may have filtered) */
+        if (img.isConnected) showImg.call(el, src);
+      });
+
+      /* Bind showImg to the specific item */
+      function showImg(src) {
+        img.onload = () => {
+          img.style.display = 'block';
+          img.classList.add('loaded');
+          const sk = el.querySelector('.gal-skeleton');
+          if(sk) sk.style.display = 'none';
+        };
+        img.onerror = () => {
+          el.className = 'gal-fb-card';
+          el.innerHTML = `<div class="fb-emoji">🖼️</div>
+            <div class="fb-num">Photo ${pi+1}</div>
+            <div class="fb-text">${p.caption}</div>`;
+        };
+        img.src = src;
       }
+
+      obs.unobserve(el);
     });
-  }, {rootMargin:'300px'});
+  }, {rootMargin: '500px 0px'});
+
   grid.querySelectorAll('.gal-item').forEach(el => io.observe(el));
 }
 
 /* ── Filter buttons ── */
 document.querySelectorAll('.gf').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.gf').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
-    btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+    document.querySelectorAll('.gf').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected','false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected','true');
     buildGallery(btn.dataset.cat);
   });
 });
 
-/* ── Featured photo click ── */
+/* ── Featured photo ── */
 document.getElementById('gal-featured').addEventListener('click', () => {
-  openLbDirect('https://edge.sitecorecloud.io/michigansta4044-msutodaye50e-prode5b2-fb0c/media/project/msu/msutoday/images/2025/2025-04-15-photo-gallery/2025-04-15-humphrey-fellowship-dlt.jpg?h=1686&iar=0&w=3000',
-    'Francis Nyonzo. Hubert H. Humphrey Fellows at Michigan State University, 2024–25.');
+  openLbDirect(
+    'https://edge.sitecorecloud.io/michigansta4044-msutodaye50e-prode5b2-fb0c/media/project/msu/msutoday/images/2025/2025-04-15-photo-gallery/2025-04-15-humphrey-fellowship-dlt.jpg?h=1200&iar=0&w=2400',
+    'Hubert H. Humphrey Fellows at Michigan State University, 2024–25. Francis Nyonzo with Dr. Anjam Chaudhary, Dr. Brian Boggs and Kyle Hess after completing the fellowship programme.'
+  );
 });
 document.getElementById('gal-featured').addEventListener('keydown', e => {
   if(e.key==='Enter'||e.key===' ') document.getElementById('gal-featured').click();
 });
 
 /* ── Lightbox ── */
-function openLb(listIdx){
+function openLb(listIdx) {
   lbIdx = listIdx;
-  const pi   = lbList[lbIdx];
-  const p    = PHOTOS[pi];
-  const url  = BASE + encodeURIComponent(p.file);
-  renderLb(url, p.caption, lbIdx+1, lbList.length);
-}
-function openLbDirect(url, cap){
-  renderLb(url, cap, null, null);
-}
-function renderLb(url, cap, cur, total){
+  const pi = lbList[lbIdx];
+  const p  = PHOTOS[pi];
+
   const lb   = document.getElementById('lightbox');
   const wrap = document.getElementById('lb-img-wrap');
   const ctr  = document.getElementById('lb-counter');
   const capt = document.getElementById('lb-caption');
-  wrap.innerHTML = url
-    ? `<img src="${url}" alt="${cap}" loading="eager" decoding="async" onerror="this.parentElement.innerHTML='<div class=lb-no-img><span class=ni-emoji>🖼️</span>${cap}</div>'">`
-    : `<div class="lb-no-img"><span class="ni-emoji">🖼️</span>${cap}</div>`;
-  ctr.textContent  = cur && total ? `${cur} / ${total}` : '';
-  capt.textContent = cap;
+
   lb.classList.add('open');
   document.body.style.overflow = 'hidden';
-  lb.focus();
+  ctr.textContent  = `${lbIdx+1} / ${lbList.length}`;
+  capt.textContent = p.caption;
+  wrap.innerHTML   = `<div style="color:rgba(255,255,255,.35);text-align:center;padding:30px">
+    <div style="font-size:40px;margin-bottom:8px;animation:spin 1s linear infinite">⏳</div>
+    Loading…</div>`;
+
+  /* Load at 1200px — much smaller than 7 MB originals */
+  enqueueCompress(p.file, 1200, 0.88, src => {
+    if (!lb.classList.contains('open')) return;  /* closed while loading */
+    wrap.innerHTML = '';
+    const img2 = new Image();
+    img2.style.cssText = 'max-width:100%;max-height:74vh;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.7);object-fit:contain;display:block';
+    img2.alt = p.caption;
+    img2.onload = () => wrap.appendChild(img2);
+    img2.onerror = () => { wrap.innerHTML = `<div class="lb-no-img"><span class="ni-emoji">🖼️</span>${p.caption}</div>`; };
+    img2.src = src;
+  });
 }
-function closeLb(){
+function openLbDirect(url, cap) {
+  const lb   = document.getElementById('lightbox');
+  const wrap = document.getElementById('lb-img-wrap');
+  const ctr  = document.getElementById('lb-counter');
+  const capt = document.getElementById('lb-caption');
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  ctr.textContent  = '';
+  capt.textContent = cap;
+  wrap.innerHTML = `<img src="${url}" alt="${cap}"
+    style="max-width:100%;max-height:74vh;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.7);object-fit:contain;display:block"
+    onerror="this.parentElement.innerHTML='<div class=lb-no-img><span class=ni-emoji>🖼️</span>${cap}</div>'">`;
+}
+function closeLb() {
   document.getElementById('lightbox').classList.remove('open');
   document.body.style.overflow = '';
 }
-function lbNav(dir){
+function lbNav(dir) {
   lbIdx = (lbIdx + dir + lbList.length) % lbList.length;
   openLb(lbIdx);
 }
+
+/* ── Spin keyframe for loading spinner ── */
+const spinStyle = document.createElement('style');
+spinStyle.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
+document.head.appendChild(spinStyle);
+
 document.getElementById('lb-close').addEventListener('click', closeLb);
-document.getElementById('lb-prev').addEventListener('click', () => lbNav(-1));
-document.getElementById('lb-next').addEventListener('click', () => lbNav(1));
-document.getElementById('lightbox').addEventListener('click', function(e){
-  if(e.target === this) closeLb();
+document.getElementById('lb-prev').addEventListener('click',  () => lbNav(-1));
+document.getElementById('lb-next').addEventListener('click',  () => lbNav(1));
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLb();
 });
-
-/* Touch swipe in lightbox */
-document.getElementById('lightbox').addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
-document.getElementById('lightbox').addEventListener('touchend', e => {
-  const dx = e.changedTouches[0].clientX - touchStartX;
-  if(Math.abs(dx) > 50){ lbNav(dx < 0 ? 1 : -1); }
+document.getElementById('lightbox').addEventListener('touchstart', e => {
+  touchStartX = e.touches[0].clientX;
 }, {passive:true});
-
-/* Keyboard nav */
+document.getElementById('lightbox').addEventListener('touchend', e => {
+  if (Math.abs(e.changedTouches[0].clientX - touchStartX) > 50)
+    lbNav(e.changedTouches[0].clientX < touchStartX ? 1 : -1);
+}, {passive:true});
 document.addEventListener('keydown', e => {
-  if(!document.getElementById('lightbox').classList.contains('open')) return;
-  if(e.key === 'ArrowRight') lbNav(1);
-  if(e.key === 'ArrowLeft')  lbNav(-1);
-  if(e.key === 'Escape')     closeLb();
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'ArrowRight') lbNav(1);
+  if (e.key === 'ArrowLeft')  lbNav(-1);
+  if (e.key === 'Escape')     closeLb();
 });
 
 /* ── Init ── */
 buildGallery('all');
 </script>
-</body>
-</html>
