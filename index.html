@@ -307,6 +307,12 @@ section+section{border-top:1px solid var(--border)}
 .srv-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px 18px;box-shadow:0 1px 5px rgba(0,0,0,.04);border-top:3px solid var(--teal);transition:transform .2s,box-shadow .2s}
 .srv-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(13,107,117,.1)}
 .srv-card.terra{border-top-color:var(--terra)}.srv-card.gold{border-top-color:var(--gold)}.srv-card.rotary{border-top-color:var(--rotary)}
+/* Full-width "Specialised Niche" card — spans whole row on tablet & desktop */
+.srv-wide{grid-column:1/-1}
+.srv-list-2col{list-style:none}
+@media(min-width:600px){
+  .srv-list-2col{display:grid;grid-template-columns:1fr 1fr;column-gap:24px}
+}
 .srv-icon{font-size:24px;margin-bottom:10px}
 .srv-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:9px}
 .srv-list{list-style:none}
@@ -602,6 +608,122 @@ footer{background:var(--navy);padding:40px 20px 28px;border-top:1px solid rgba(2
   .nav-links{display:none}
   .nav-drawer{display:flex}
 }
+
+/* ═══════════════════════════════════════════════
+   FEATURED ANNOUNCEMENT BANNER (new & upcoming)
+═══════════════════════════════════════════════ */
+.announce{
+  background:linear-gradient(135deg,#0d6b75 0%,#0b1623 70%);
+  position:relative;overflow:hidden;
+  padding:0;
+}
+.announce::before{
+  content:'';position:absolute;top:-80px;right:-60px;
+  width:300px;height:300px;border-radius:50%;
+  border:40px solid rgba(201,152,26,.06);pointer-events:none;
+}
+.announce-inner{
+  max-width:1080px;margin:0 auto;padding:22px 20px;
+  display:flex;align-items:center;gap:22px;flex-wrap:wrap;
+  position:relative;z-index:1;
+}
+@media(min-width:768px){.announce-inner{padding:26px 32px;flex-wrap:nowrap}}
+.announce-pulse{
+  flex-shrink:0;display:flex;align-items:center;gap:10px;
+}
+.announce-tag{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--gold);color:var(--navy);
+  font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  padding:6px 13px;border-radius:30px;white-space:nowrap;
+  box-shadow:0 2px 12px rgba(201,152,26,.4);
+}
+.announce-dot{
+  width:8px;height:8px;border-radius:50%;background:#fff;
+  animation:apulse 1.6s infinite;
+}
+@keyframes apulse{
+  0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}
+  70%{box-shadow:0 0 0 8px rgba(255,255,255,0)}
+  100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}
+}
+.announce-body{flex:1;min-width:0}
+.announce-kicker{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);font-weight:700;margin-bottom:6px;
+}
+.announce-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(18px,3vw,24px);font-weight:700;
+  color:#fff;line-height:1.25;margin-bottom:6px;
+}
+.announce-meta{
+  font-size:12.5px;color:rgba(255,255,255,.6);line-height:1.5;
+}
+.announce-meta strong{color:rgba(253,243,208,.95);font-weight:600}
+.announce-cta{
+  flex-shrink:0;display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(201,152,26,.4);
+  color:var(--gold);font-size:12px;font-weight:600;
+  padding:10px 18px;border-radius:5px;white-space:nowrap;
+  transition:all .2s;min-height:44px;
+}
+.announce-cta:hover{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+
+/* ═══════════════════════════════════════════════
+   MOBILE HARDENING — prevents overflow, zoom & layout breaks
+═══════════════════════════════════════════════ */
+html,body{max-width:100%;overflow-x:hidden}
+*{max-width:100%}
+img,svg,video{height:auto}
+
+/* Stop decorative circles from forcing horizontal scroll on phones */
+@media(max-width:767px){
+  .hero-deco,.hero-grid{display:none}
+  .announce::before{display:none}
+
+  /* Hero: comfortable height, no huge empty space */
+  .hero{min-height:auto;padding-top:var(--nav-h);padding-bottom:0}
+  .hero-inner{padding:40px 18px 130px;gap:28px}
+  .hero-cbar{position:static;margin-top:0}
+  .hero-cbar-inner{justify-content:flex-start}
+
+  /* Announcement banner: clean vertical stack on phones */
+  .announce-inner{flex-direction:column;align-items:flex-start;gap:14px;padding:20px 18px}
+  .announce-cta{width:100%;justify-content:center}
+  .announce-title{font-size:19px}
+
+  /* Tap targets & readable text everywhere */
+  .htag{font-size:11px}
+  .soc{font-size:12px;padding:10px 14px}
+
+  /* Prevent iOS auto-zoom on any input/select (16px min) */
+  input,select,textarea{font-size:16px}
+
+  /* Section padding tighter but breathable */
+  .sec{padding:48px 18px}
+  .dark-sec,.alt-sec{padding:48px 0}
+  .dark-sec .sec-wrap,.alt-sec .sec-wrap{padding:0 18px}
+
+  /* Headings never overflow */
+  .h2,.hero-name,.announce-title{overflow-wrap:break-word;word-break:break-word}
+
+  /* Publications tabs scroll instead of squashing */
+  .pub-tabs{margin-left:-2px;margin-right:-2px}
+}
+
+/* Very small phones (≤360px) */
+@media(max-width:360px){
+  .hero-name{font-size:38px}
+  .nav-logo{font-size:16px}
+  .hero-inner{padding:32px 14px 120px}
+  .sec{padding:40px 14px}
+}
+
+/* Respect users who prefer reduced motion */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
 </style>
 </head>
 <body>
@@ -707,6 +829,23 @@ footer{background:var(--navy);padding:40px 20px 28px;border-top:1px solid rgba(2
   </div>
 </section>
 
+<!-- ══ FEATURED ANNOUNCEMENT — new & upcoming ══ -->
+<section class="announce" aria-label="Latest announcement">
+  <div class="announce-inner">
+    <div class="announce-pulse">
+      <span class="announce-tag"><span class="announce-dot"></span> New &amp; Upcoming</span>
+    </div>
+    <div class="announce-body">
+      <div class="announce-kicker">📚 Forthcoming Book Chapter · 2027</div>
+      <div class="announce-title">Co-authoring a chapter in <em>The Routledge Handbook of Political Corruption</em> (2nd ed.)</div>
+      <div class="announce-meta">
+        Francis Nyonzo joins <strong>Anya Schiffrin</strong> — Columbia University SIPA scholar and wife of Nobel Prize-winning economist <strong>Joseph Stiglitz</strong> — together with Dylan W. Groves and Marco Kitundu, on a chapter examining political corruption in the East African region. Forthcoming from Routledge.
+      </div>
+    </div>
+    <a class="announce-cta" href="https://www.routledge.com/The-Routledge-Handbook-of-Political-Corruption/Heywood-Kubbe-Schwickerath/p/book/9781032732145" target="_blank" rel="noopener">View on Routledge ↗</a>
+  </div>
+</section>
+
 <section id="about" class="dark-sec">
   <div class="sec-wrap">
     <div class="sh">
@@ -798,10 +937,10 @@ footer{background:var(--navy);padding:40px 20px 28px;border-top:1px solid rgba(2
           <li>Cross-border trade analysis in East Africa</li>
         </ul>
       </div>
-      <div class="srv-card" style="grid-column:span 2">
+      <div class="srv-card srv-wide">
         <div class="srv-icon">🎯</div>
         <div class="srv-title">Specialised Niche Services</div>
-        <ul class="srv-list" style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px">
+        <ul class="srv-list srv-list-2col">
           <li>Mobile money taxation analysis</li>
           <li>Informal sector formalisation strategies</li>
           <li>Digital economy policy research</li>
@@ -960,6 +1099,12 @@ footer{background:var(--navy);padding:40px 20px 28px;border-top:1px solid rgba(2
         <a class="al" href="https://www.isp.msu.edu/international-centers-units/student-scholar-programs/humphrey-fellowship-program/profiles/humphrey-fellows/nyonzo" target="_blank">↗ MSU Profile</a>
       </div>
       <div class="ach-card">
+        <div class="ai">📚</div>
+        <div class="at">Co-author, Routledge Handbook of Political Corruption (2nd ed.)</div>
+        <div class="ad">Contributing co-author of a chapter on political corruption in East Africa, alongside Anya Schiffrin — Columbia University SIPA scholar and wife of Nobel laureate Joseph Stiglitz — and Dylan W. Groves. Forthcoming with Routledge, 2027.</div>
+        <a class="al g" href="https://www.routledge.com/The-Routledge-Handbook-of-Political-Corruption/Heywood-Kubbe-Schwickerath/p/book/9781032732145" target="_blank" rel="noopener">↗ Routledge</a>
+      </div>
+      <div class="ach-card">
         <div class="ai">✍️</div>
         <div class="at">African Liberty Writing Fellow 2023–24</div>
         <div class="ad">Writing Fellow at African Liberty — a Students For Liberty project — producing op-eds and policy commentary advancing individual freedom and democracy across Africa.</div>
@@ -1062,6 +1207,14 @@ footer{background:var(--navy);padding:40px 20px 28px;border-top:1px solid rgba(2
 
     <div id="tab-peer" class="pub-panel active">
       <div class="peer-list">
+        <div class="peer-card" style="border-left-color:var(--gold);background:linear-gradient(135deg,rgba(201,152,26,.1),rgba(255,255,255,.04))">
+          <span class="py" style="background:rgba(201,152,26,.18);color:var(--gold)">2027 · Book Chapter · Forthcoming</span>
+          <div class="ptitle">Political Corruption in the East African Region: Bureaucratic Discretion, Shadow Politics, State Policy, and Vote-Buying Amidst Security Challenges</div>
+          <div class="pauth">Anya Schiffrin, Dylan W. Groves, Marco Kitundu &amp; Francis Nyonzo</div>
+          <div class="pcite">Chapter in P. M. Heywood, I. Kubbe &amp; A. K. Schwickerath (Eds.), <em>The Routledge Handbook of Political Corruption</em> (2nd ed.). Routledge. Co-authored with Anya Schiffrin — Columbia University SIPA scholar and wife of Nobel laureate economist Joseph Stiglitz — and Dylan W. Groves.</div>
+          <a class="pb gold" href="https://www.routledge.com/The-Routledge-Handbook-of-Political-Corruption/Heywood-Kubbe-Schwickerath/p/book/9781032732145" target="_blank" rel="noopener">↗ Routledge</a>
+          <a class="pb" href="https://www.taylorfrancis.com/books/edit/10.4324/9781003465485/routledge-handbook-political-corruption-paul-heywood-ina-kubbe-anna-schwickerath" target="_blank" rel="noopener">↗ Taylor &amp; Francis</a>
+        </div>
         <div class="peer-card">
           <span class="py">2025</span>
           <div class="ptitle">Denominational Inflation: Limited Currency Divisibility in Cash Payment Systems – Tanzania as a Case Study</div>
