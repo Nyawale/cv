@@ -1,6 +1,0 @@
-# robots.txt for Francis Nyonzo - cv.francisnyonzo.workers.dev
-User-agent: *
-Allow: /
-
-# Sitemap location
-Sitemap: https://cv.francisnyonzo.workers.dev/sitemap.xml
